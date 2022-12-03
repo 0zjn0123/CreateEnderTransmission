@@ -32,11 +32,13 @@ public class CreateEnderTransmission {
 
         Blocks.register();
         TileEntities.register();
+        Packets.registerPackets();
     }
 
     private void setup(final FMLCommonSetupEvent event) {
         // Some preinit code
         LOGGER.info("HELLO FROM PREINIT");
+        event.enqueueWork(Packets::registerPackets);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

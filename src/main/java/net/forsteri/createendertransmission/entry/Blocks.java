@@ -7,6 +7,7 @@ import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
 import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderBlock;
+import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyTransmitterBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -24,6 +25,17 @@ public class Blocks {
                     .initialProperties(SharedProperties::softMetal)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(BlockStateGen.axisBlockProvider(true))
+                    .item()
+                    .transform(customItemModel())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(BlockStressDefaults.setImpact(8))
+                    .register();
+
+    public static final BlockEntry<EnergyTransmitterBlock> ENERGY_TRANSMITTER_BLOCK =
+            REGISTRATE.block("energy_transmitter", EnergyTransmitterBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .blockstate(BlockStateGen.directionalBlockProvider(true))
                     .item()
                     .transform(customItemModel())
                     .addLayer(() -> RenderType::cutoutMipped)

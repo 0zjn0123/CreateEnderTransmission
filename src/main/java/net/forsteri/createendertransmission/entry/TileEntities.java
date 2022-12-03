@@ -1,11 +1,13 @@
 package net.forsteri.createendertransmission.entry;
 
+import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
+import com.simibubi.create.content.contraptions.relays.encased.ShaftInstance;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
 import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderInstance;
-import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderRenderer;
 import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderTileEntity;
+import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyTransmitterTileEntity;
 
 public class TileEntities {
 
@@ -16,7 +18,14 @@ public class TileEntities {
             .tileEntity("chunk_loader", LoaderTileEntity::new)
             .instance(() -> LoaderInstance::new, false)
             .validBlocks(net.forsteri.createendertransmission.entry.Blocks.CHUNK_LOADER_BLOCK)
-            .renderer(() -> LoaderRenderer::new)
+            .renderer(() -> KineticTileEntityRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<EnergyTransmitterTileEntity> ENERGY_TRANSMITTER_TILE = REGISTRATE
+            .tileEntity("energy_transmitter", EnergyTransmitterTileEntity::new)
+            .instance(() -> ShaftInstance::new, false)
+            .validBlocks(net.forsteri.createendertransmission.entry.Blocks.CHUNK_LOADER_BLOCK)
+            .renderer(() -> KineticTileEntityRenderer::new)
             .register();
     public static void register(){}
 }

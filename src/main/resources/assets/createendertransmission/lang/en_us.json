@@ -1,4 +1,8 @@
 {
   "itemGroup.ender_transmission":"Create Ender Transmission",
-  "block.createendertransmission.chunk_loader": "Chunk Loader"
+  "block.createendertransmission.chunk_loader": "Chunk Loader",
+  "block.createendertransmission.energy_transmitter": "Energy Transmitter",
+
+  "create.gui.transmitter.channel_title": "Channel",
+  "create.gui.transmitter.password_title": "Password"
 }
