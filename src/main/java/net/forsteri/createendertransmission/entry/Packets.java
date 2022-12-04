@@ -2,7 +2,7 @@ package net.forsteri.createendertransmission.entry;
 
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
-import net.forsteri.createendertransmission.blocks.ConfigureTransmitterPacket;
+import net.forsteri.createendertransmission.transmitUtil.ConfigureTransmitterPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -42,12 +42,14 @@ public enum Packets {
             packet.packet.register();
     }
 
+    @SuppressWarnings("unused")
     public static void sendToNear(Level world, BlockPos pos, int range, Object message) {
         channel.send(
                 PacketDistributor.NEAR.with(PacketDistributor.TargetPoint.p(pos.getX(), pos.getY(), pos.getZ(), range, world.dimension())),
                 message);
     }
 
+    @SuppressWarnings("FieldMayBeFinal")
     private static class LoadedPacket<T extends SimplePacketBase> {
         private static int index = 0;
 

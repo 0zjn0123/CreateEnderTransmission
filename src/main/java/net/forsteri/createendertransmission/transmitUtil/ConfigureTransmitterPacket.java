@@ -1,8 +1,7 @@
-package net.forsteri.createendertransmission.blocks;
+package net.forsteri.createendertransmission.transmitUtil;
 
 import com.simibubi.create.foundation.networking.TileEntityConfigurationPacket;
 import com.simibubi.create.foundation.tileEntity.SyncedTileEntity;
-import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyTransmitterTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -46,8 +45,4 @@ public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<Sy
         syncedTileEntity.getTileData().putInt("password", password);
     }
 
-    protected void applySettings(EnergyTransmitterTileEntity energyTransmitterTileEntity) {
-        energyTransmitterTileEntity.getTileData().putInt("channel", channel);
-        energyTransmitterTileEntity.getTileData().putInt("password", password);
-    }
 }

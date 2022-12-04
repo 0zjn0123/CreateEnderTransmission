@@ -17,14 +17,14 @@ public class TileEntities {
     public static final BlockEntityEntry<LoaderTileEntity> CHUNK_LOADER_TILE = REGISTRATE
             .tileEntity("chunk_loader", LoaderTileEntity::new)
             .instance(() -> LoaderInstance::new, false)
-            .validBlocks(net.forsteri.createendertransmission.entry.Blocks.CHUNK_LOADER_BLOCK)
+            .validBlocks(Blocks.CHUNK_LOADER_BLOCK)
             .renderer(() -> KineticTileEntityRenderer::new)
             .register();
 
     public static final BlockEntityEntry<EnergyTransmitterTileEntity> ENERGY_TRANSMITTER_TILE = REGISTRATE
             .tileEntity("energy_transmitter", EnergyTransmitterTileEntity::new)
             .instance(() -> ShaftInstance::new, false)
-            .validBlocks(net.forsteri.createendertransmission.entry.Blocks.CHUNK_LOADER_BLOCK)
+            .validBlocks(Blocks.ENERGY_TRANSMITTER_BLOCK)
             .renderer(() -> KineticTileEntityRenderer::new)
             .register();
     public static void register(){}

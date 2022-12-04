@@ -1,4 +1,4 @@
-package net.forsteri.createendertransmission.blocks;
+package net.forsteri.createendertransmission.transmitUtil;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class TransmitterScreen extends AbstractSimiScreen {
 
     public KineticTileEntity te;

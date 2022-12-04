@@ -3,6 +3,7 @@ package net.forsteri.createendertransmission;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import net.forsteri.createendertransmission.transmitUtil.Networks;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -21,7 +22,7 @@ public class CreateEnderTransmission {
     // Directly reference a slf4j logger
 
     public static final String MOD_ID = "createendertransmission";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public CreateEnderTransmission() {
         // Register the setup method for modloading
@@ -39,6 +40,7 @@ public class CreateEnderTransmission {
         // Some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         event.enqueueWork(Packets::registerPackets);
+        Networks.register();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

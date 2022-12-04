@@ -1,8 +1,6 @@
 package net.forsteri.createendertransmission.blocks.chunkLoader;
 
-import com.simibubi.create.content.contraptions.base.KineticBlock;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.foundation.block.ITE;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -19,30 +17,20 @@ public class LoaderTileEntity extends KineticTileEntity {
 
     @Override
     public void tick() {
+        super.tick();
+        assert level != null;
         if (level.isClientSide) {
             return;
         }
-        if (this.getSpeed() != 0){
-            ForgeChunkManager.forceChunk(
-                    (ServerLevel) level,
-                    CreateEnderTransmission.MOD_ID,
-                    getBlockPos(),
-                    new ChunkPos(getBlockPos()).x,
-                    new ChunkPos(getBlockPos()).z,
-                    true,
-                    true
-            );
-        }else {
-            ForgeChunkManager.forceChunk(
-                    (ServerLevel) level,
-                    CreateEnderTransmission.MOD_ID,
-                    getBlockPos(),
-                    new ChunkPos(getBlockPos()).x,
-                    new ChunkPos(getBlockPos()).z,
-                    false,
-                    true
-            );
-        }
+        ForgeChunkManager.forceChunk(
+                (ServerLevel) level,
+                CreateEnderTransmission.MOD_ID,
+                getBlockPos(),
+                new ChunkPos(getBlockPos()).x,
+                new ChunkPos(getBlockPos()).z,
+                this.getSpeed() != 0,
+                true
+        );
     }
 
 }
