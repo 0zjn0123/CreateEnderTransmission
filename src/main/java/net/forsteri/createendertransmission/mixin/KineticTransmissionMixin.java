@@ -8,13 +8,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = RotationPropagator.class)
+@Mixin(value = RotationPropagator.class, remap = false)
 public class KineticTransmissionMixin {
-    @Inject(at = @At("HEAD"), method = "getRotationSpeedModifier(Lcom/simibubi/create/content/contraptions/base/KineticTileEntity;Lcom/simibubi/create/content/contraptions/base/KineticTileEntity;)F", cancellable = true, remap = false)
+    @Inject(at = @At("TAIL"), method = "getRotationSpeedModifier", remap = false, cancellable = true)
     private static void getRotationSpeedModifier(KineticTileEntity from, KineticTileEntity _to, CallbackInfoReturnable<Float> cir) {
-        if(from instanceof EnergyTransmitterTileEntity && _to instanceof EnergyTransmitterTileEntity && from != _to) {
+        if(from instanceof EnergyTransmitterTileEntity
+                && _to instanceof EnergyTransmitterTileEntity
+                && from != _to
+                && from.getTileData().getInt("channel") == _to.getTileData().getInt("channel")
+                && from.getTileData().getInt("password") == _to.getTileData().getInt("password")
+        ) {
             cir.setReturnValue(1f);
-            cir.cancel();
         }
     }
 }

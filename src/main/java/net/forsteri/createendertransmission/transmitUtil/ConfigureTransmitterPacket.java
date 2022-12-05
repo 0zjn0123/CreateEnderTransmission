@@ -1,12 +1,12 @@
 package net.forsteri.createendertransmission.transmitUtil;
 
+import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import com.simibubi.create.foundation.networking.TileEntityConfigurationPacket;
-import com.simibubi.create.foundation.tileEntity.SyncedTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 
-public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<SyncedTileEntity> {
+public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<KineticTileEntity> {
 
     private int channel;
     private int password;
@@ -40,9 +40,24 @@ public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<Sy
     }
 
     @Override
-    protected void applySettings(SyncedTileEntity syncedTileEntity) {
-        syncedTileEntity.getTileData().putInt("channel", channel);
-        syncedTileEntity.getTileData().putInt("password", password);
+    protected void applySettings(KineticTileEntity tileEntity) {
+        if(
+                tileEntity.getTileData().getInt("channel") != channel ||
+                tileEntity.getTileData().getInt("password") != password
+        ) {
+            for (KineticTileEntity relatedTileEntity : Networks.ENERGY.channels.get(
+                    tileEntity.getTileData().getInt("channel")
+            ).get(
+                    tileEntity.getTileData().getInt("password")
+            )) {
+                relatedTileEntity.detachKinetics();
+                relatedTileEntity.attachKinetics();
+            }
+            tileEntity.getTileData().putInt("channel", channel);
+            tileEntity.getTileData().putInt("password", password);
+            tileEntity.detachKinetics();
+            tileEntity.attachKinetics();
+        }
     }
 
 }

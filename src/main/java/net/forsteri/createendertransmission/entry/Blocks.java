@@ -39,7 +39,7 @@ public class Blocks {
                     .item()
                     .transform(customItemModel())
                     .addLayer(() -> RenderType::cutoutMipped)
-                    .transform(BlockStressDefaults.setImpact(8))
+                    .transform(BlockStressDefaults.setImpact(1))
                     .register();
 
     public static void register(){}
