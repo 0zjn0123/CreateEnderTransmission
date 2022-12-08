@@ -7,7 +7,6 @@ import com.simibubi.create.foundation.block.ITE;
 import com.simibubi.create.foundation.gui.ScreenOpener;
 import net.forsteri.createendertransmission.entry.Blocks;
 import net.forsteri.createendertransmission.entry.TileEntities;
-import net.forsteri.createendertransmission.transmitUtil.Networks;
 import net.forsteri.createendertransmission.transmitUtil.TransmitterScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
@@ -57,6 +56,7 @@ public class EnergyTransmitterBlock extends DirectionalKineticBlock implements I
         return face.getAxis() == state.getValue(FACING).getAxis();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public @NotNull InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
                                           BlockHitResult hit) {
@@ -79,13 +79,13 @@ public class EnergyTransmitterBlock extends DirectionalKineticBlock implements I
             ScreenOpener.open(new TransmitterScreen(te, Blocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "SuspiciousMethodCalls"})
     @Override
     public void onRemove(BlockState p_60515_, Level p_60516_, BlockPos p_60517_, BlockState p_60518_, boolean p_60519_) {
-        Networks.ENERGY.channels
+        EnergyNetwork.ENERGY.channels
                 .get(Objects.requireNonNull(getTileEntity(p_60516_, p_60517_)).getTileData().getInt("channel"))
                 .get(Objects.requireNonNull(getTileEntity(p_60516_, p_60517_)).getTileData().getInt("password"))
-                .remove(this);
+                .remove(p_60517_);
         super.onRemove(p_60515_, p_60516_, p_60517_, p_60518_, p_60519_);
     }
 }

@@ -3,7 +3,7 @@ package net.forsteri.createendertransmission;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import net.forsteri.createendertransmission.transmitUtil.Networks;
+import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyNetwork;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -40,7 +40,7 @@ public class CreateEnderTransmission {
         // Some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         event.enqueueWork(Packets::registerPackets);
-        Networks.register();
+        EnergyNetwork.register();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -65,5 +65,6 @@ public class CreateEnderTransmission {
         return REGISTRATE.get();
     }
 
+    @SuppressWarnings("removal")
     public static final NonNullSupplier<CreateRegistrate> REGISTRATE = CreateRegistrate.lazy(CreateEnderTransmission.MOD_ID);
 }

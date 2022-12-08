@@ -1,7 +1,7 @@
 {
   "itemGroup.ender_transmission":"机械动力：末影传输",
   "block.createendertransmission.chunk_loader": "区块加载器",
-  "block.createendertransmission.energy_transmitter": "末影应力传输器",
+  "block.createendertransmission.energy_transmitter": "传输器",
 
   "create.gui.transmitter.channel_title": "频道",
   "create.gui.transmitter.password_title": "密码"

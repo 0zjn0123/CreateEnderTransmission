@@ -8,6 +8,7 @@ import net.forsteri.createendertransmission.CreateEnderTransmission;
 import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderInstance;
 import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderTileEntity;
 import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyTransmitterTileEntity;
+import net.forsteri.createendertransmission.blocks.itemTransmitter.ItemTransmitterTileEntity;
 
 public class TileEntities {
 
@@ -27,5 +28,11 @@ public class TileEntities {
             .validBlocks(Blocks.ENERGY_TRANSMITTER_BLOCK)
             .renderer(() -> KineticTileEntityRenderer::new)
             .register();
+
+    public static final BlockEntityEntry<ItemTransmitterTileEntity> ITEM_TRANSMITTER_TILE_ENTITY = REGISTRATE
+            .tileEntity("item_transmitter", ItemTransmitterTileEntity::new)
+            .validBlocks(Blocks.ITEM_TRANSMITTER_BLOCK)
+            .register();
+
     public static void register(){}
 }

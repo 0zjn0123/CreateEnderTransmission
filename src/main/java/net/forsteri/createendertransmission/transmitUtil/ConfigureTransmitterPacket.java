@@ -45,14 +45,7 @@ public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<Ki
                 tileEntity.getTileData().getInt("channel") != channel ||
                 tileEntity.getTileData().getInt("password") != password
         ) {
-            for (KineticTileEntity relatedTileEntity : Networks.ENERGY.channels.get(
-                    tileEntity.getTileData().getInt("channel")
-            ).get(
-                    tileEntity.getTileData().getInt("password")
-            )) {
-                relatedTileEntity.detachKinetics();
-                relatedTileEntity.attachKinetics();
-            }
+            ((ITransmitter) tileEntity).reloadSettings();
             tileEntity.getTileData().putInt("channel", channel);
             tileEntity.getTileData().putInt("password", password);
             tileEntity.detachKinetics();

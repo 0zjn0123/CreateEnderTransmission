@@ -2,7 +2,7 @@ package net.forsteri.createendertransmission.blocks.energyTransmitter;
 
 import com.simibubi.create.content.contraptions.base.IRotate;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import net.forsteri.createendertransmission.transmitUtil.Networks;
+import net.forsteri.createendertransmission.transmitUtil.ITransmitter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.List;
 
 
-public class EnergyTransmitterTileEntity extends KineticTileEntity {
+public class EnergyTransmitterTileEntity extends KineticTileEntity implements ITransmitter {
     public EnergyTransmitterTileEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
     }
@@ -54,8 +54,15 @@ public class EnergyTransmitterTileEntity extends KineticTileEntity {
     }
 
     public List<KineticTileEntity> getConnectedTransmitters(){
-        return Networks.ENERGY.channels
+        return EnergyNetwork.ENERGY.channels
                 .get(this.getTileData().getInt("channel"))
-                .get(this.getTileData().getInt("network"));
+                .get(this.getTileData().getInt("password"));
+    }
+
+    @Override
+    public void reloadSettings(){
+        for (KineticTileEntity relatedTileEntity : getConnectedTransmitters()) {
+            relatedTileEntity.detachKinetics();relatedTileEntity.attachKinetics();
+        }
     }
 }
