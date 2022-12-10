@@ -50,6 +50,6 @@ public class FluidTransmitterBlock extends Block implements ITE<FluidTransmitter
     @OnlyIn(value = Dist.CLIENT)
     protected void displayScreen(FluidTransmitterTileEntity te, Player player) {
         if (player instanceof LocalPlayer)
-            ScreenOpener.open(new TransmitterScreen(te, Blocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
+            ScreenOpener.open(new TransmitterScreen(te, Blocks.FLUID_TRANSMITTER_BLOCK.asStack()));
     }
 }

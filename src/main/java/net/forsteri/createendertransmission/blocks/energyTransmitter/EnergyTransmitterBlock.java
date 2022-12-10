@@ -79,13 +79,11 @@ public class EnergyTransmitterBlock extends DirectionalKineticBlock implements I
             ScreenOpener.open(new TransmitterScreen(te, Blocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
     }
 
-    @SuppressWarnings({"deprecation", "SuspiciousMethodCalls"})
+    @SuppressWarnings({"deprecation"})
     @Override
     public void onRemove(BlockState p_60515_, Level p_60516_, BlockPos p_60517_, BlockState p_60518_, boolean p_60519_) {
-        EnergyNetwork.ENERGY.channels
-                .get(Objects.requireNonNull(getTileEntity(p_60516_, p_60517_)).getTileData().getInt("channel"))
-                .get(Objects.requireNonNull(getTileEntity(p_60516_, p_60517_)).getTileData().getInt("password"))
-                .remove(p_60517_);
+        if(getTileEntity(p_60516_, p_60517_) != null)
+            Objects.requireNonNull(getTileEntity(p_60516_, p_60517_)).getConnectedTransmitters().remove(getTileEntity(p_60516_, p_60517_));
         super.onRemove(p_60515_, p_60516_, p_60517_, p_60518_, p_60519_);
     }
 }

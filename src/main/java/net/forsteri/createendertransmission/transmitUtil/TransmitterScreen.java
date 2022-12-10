@@ -35,11 +35,11 @@ public class TransmitterScreen extends AbstractSimiScreen {
 
     private Label labelChannel;
 
-    private Label labelPassword;
+    private Label labelTestInput;
 
     private ScrollInput areaChannel;
 
-    private ScrollInput areaPassword;
+    private TextInputWidget areaTestInput;
 
     @Override
     protected void renderWindow(PoseStack ms, int mouseX, int mouseY, float partialTicks) {
@@ -66,22 +66,12 @@ public class TransmitterScreen extends AbstractSimiScreen {
 
         labelChannel = new Label(x + 49, y + 28, Components.immutableEmpty()).colored(0xFFFFFFFF)
                 .withShadow();
-        labelPassword = new Label(x + 49, y + 50, Components.immutableEmpty()).colored(0xFFFFFFFF)
+
+        labelTestInput = new Label(x + 49, y + 50, Components.immutableEmpty()).colored(0xFFFFFFFF)
                 .withShadow();
 
         areaChannel = new SelectionScrollInput(x + 45, y + 21, 109, 18).forOptions(
-                    List.of(
-                            Components.translatable("enchantment.level.1"),
-                            Components.translatable("enchantment.level.2"),
-                            Components.translatable("enchantment.level.3"),
-                            Components.translatable("enchantment.level.4"),
-                            Components.translatable("enchantment.level.5"),
-                            Components.translatable("enchantment.level.6"),
-                            Components.translatable("enchantment.level.7"),
-                            Components.translatable("enchantment.level.8"),
-                            Components.translatable("enchantment.level.9"),
-                            Components.translatable("enchantment.level.10")
-                    )
+                    List.of(Components.translatable("enchantment.level.1"), Components.translatable("enchantment.level.2"), Components.translatable("enchantment.level.3"), Components.translatable("enchantment.level.4"), Components.translatable("enchantment.level.5"), Components.translatable("enchantment.level.6"), Components.translatable("enchantment.level.7"), Components.translatable("enchantment.level.8"), Components.translatable("enchantment.level.9"), Components.translatable("enchantment.level.10"))
                 )
                 .titled(Lang.translateDirect("gui.transmitter.channel_title").plainCopy())
                 .writingTo(labelChannel)
@@ -89,24 +79,10 @@ public class TransmitterScreen extends AbstractSimiScreen {
                         te.getTileData().contains("channel") ? te.getTileData().getInt("channel") : 0
                 );
 
-        areaPassword = new SelectionScrollInput(x + 45, y + 43, 109, 18).forOptions(
-                        List.of(
-                                Components.translatable("enchantment.level.1"),
-                                Components.translatable("enchantment.level.2"),
-                                Components.translatable("enchantment.level.3"),
-                                Components.translatable("enchantment.level.4"),
-                                Components.translatable("enchantment.level.5"),
-                                Components.translatable("enchantment.level.6"),
-                                Components.translatable("enchantment.level.7"),
-                                Components.translatable("enchantment.level.8"),
-                                Components.translatable("enchantment.level.9"),
-                                Components.translatable("enchantment.level.10")
-                        )
-                )
-                .titled(Lang.translateDirect("gui.transmitter.password_title").plainCopy())
-                .writingTo(labelPassword)
+        areaTestInput = new TextInputWidget(x + 45, y + 43, 109, 18)
+                .writingTo(labelTestInput)
                 .setState(
-                        te.getTileData().contains("password") ? te.getTileData().getInt("password") : 0
+                        te.getTileData().contains("password") ? te.getTileData().getString("password") : ""
                 );
 
         confirmButton =
@@ -115,8 +91,8 @@ public class TransmitterScreen extends AbstractSimiScreen {
 
         addRenderableWidget(labelChannel);
         addRenderableWidget(areaChannel);
-        addRenderableWidget(labelPassword);
-        addRenderableWidget(areaPassword);
+        addRenderableWidget(labelTestInput);
+        addRenderableWidget(areaTestInput);
 
 
         addRenderableWidget(confirmButton);
@@ -125,6 +101,16 @@ public class TransmitterScreen extends AbstractSimiScreen {
     @Override
     public void removed() {
         super.removed();
-        Packets.channel.sendToServer(new ConfigureTransmitterPacket(te.getBlockPos(), areaChannel.getState(), areaPassword.getState()));
+        Packets.channel.sendToServer(new ConfigureTransmitterPacket(te.getBlockPos(), areaChannel.getState(), areaTestInput.getState()));
+    }
+
+    @Override
+    public boolean charTyped(char p_94683_, int p_94684_) {
+        return super.charTyped(p_94683_, p_94684_) || areaTestInput.charTyped(p_94683_, p_94684_);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        return areaTestInput.keyPressed(keyCode, scanCode, modifiers);
     }
 }

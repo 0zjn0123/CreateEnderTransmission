@@ -9,9 +9,9 @@ import net.minecraft.network.FriendlyByteBuf;
 public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<KineticTileEntity> {
 
     private int channel;
-    private int password;
+    private String password;
 
-    public ConfigureTransmitterPacket(BlockPos pos, int channel, int password) {
+    public ConfigureTransmitterPacket(BlockPos pos, int channel, String password) {
         super(pos);
         this.channel = channel;
         this.password = password;
@@ -25,7 +25,7 @@ public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<Ki
     protected void writeSettings(FriendlyByteBuf buffer) {
         CompoundTag tag = new CompoundTag();
         tag.putInt("channel", channel);
-        tag.putInt("password", password);
+        tag.putString("password", password);
         buffer.writeNbt(tag);
     }
 
@@ -34,7 +34,7 @@ public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<Ki
         CompoundTag tag = buffer.readNbt();
         if (tag != null) {
             channel = tag.getInt("channel");
-            password = tag.getInt("password");
+            password = tag.getString("password");
         }
 
     }
@@ -43,13 +43,14 @@ public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<Ki
     protected void applySettings(KineticTileEntity tileEntity) {
         if(
                 tileEntity.getTileData().getInt("channel") != channel ||
-                tileEntity.getTileData().getInt("password") != password
+                        !tileEntity.getTileData().getString("password").equals(password)
         ) {
             ((ITransmitter) tileEntity).reloadSettings();
             tileEntity.getTileData().putInt("channel", channel);
-            tileEntity.getTileData().putInt("password", password);
+            tileEntity.getTileData().putString("password", password);
             tileEntity.detachKinetics();
             tileEntity.attachKinetics();
+            ((ITransmitter) tileEntity).afterReload();
         }
     }
 

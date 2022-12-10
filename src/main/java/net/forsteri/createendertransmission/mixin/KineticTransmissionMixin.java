@@ -16,7 +16,7 @@ public class KineticTransmissionMixin {
                 && _to instanceof EnergyTransmitterTileEntity
                 && from != _to
                 && from.getTileData().getInt("channel") == _to.getTileData().getInt("channel")
-                && from.getTileData().getInt("password") == _to.getTileData().getInt("password")
+                && from.getTileData().getString("password").equals(_to.getTileData().getString("password"))
         ) {
             cir.setReturnValue(1f);
         }

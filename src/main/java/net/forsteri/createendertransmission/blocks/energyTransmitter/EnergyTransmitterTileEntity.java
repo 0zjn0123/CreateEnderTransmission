@@ -1,5 +1,6 @@
 package net.forsteri.createendertransmission.blocks.energyTransmitter;
 
+import com.mojang.datafixers.util.Pair;
 import com.simibubi.create.content.contraptions.base.IRotate;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import net.forsteri.createendertransmission.transmitUtil.ITransmitter;
@@ -8,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,13 +22,24 @@ public class EnergyTransmitterTileEntity extends KineticTileEntity implements IT
     public void tick() {
         super.tick();
         if (!getConnectedTransmitters().contains(this)) getConnectedTransmitters().add(this);
+        var connectedTransmitters = new ArrayList<>(getConnectedTransmitters());
+        for (KineticTileEntity entity: connectedTransmitters){
+            if(!(getTileData().getInt("channel") == entity.getTileData().getInt("channel") && getTileData().getString("password").equals(entity.getTileData().getString("password"))))
+            {
+                detachKinetics();
+                setSpeed(0);
+                source = null;
+                setNetwork(worldPosition.asLong());
+                attachKinetics();
+            }
+        }
     }
 
     @Override
     public boolean isCustomConnection(KineticTileEntity other, BlockState state, BlockState otherState) {
         if(other instanceof EnergyTransmitterTileEntity){
             return other.getTileData().getInt("channel") == this.getTileData().getInt("channel") &&
-                    other.getTileData().getInt("password") == this.getTileData().getInt("password");
+                    other.getTileData().getString("password").equals(this.getTileData().getString("password"));
         }
         return false;
     }
@@ -54,15 +67,45 @@ public class EnergyTransmitterTileEntity extends KineticTileEntity implements IT
     }
 
     public List<KineticTileEntity> getConnectedTransmitters(){
-        return EnergyNetwork.ENERGY.channels
-                .get(this.getTileData().getInt("channel"))
-                .get(this.getTileData().getInt("password"));
+        for (Pair<String, List<KineticTileEntity>> pair : EnergyNetwork.ENERGY.channels
+                .get(this.getTileData().getInt("channel"))){
+            if(pair.getFirst().equals(this.getTileData().getString("password"))){
+                return pair.getSecond();
+            }
+
+        }
+        Pair<String, List<KineticTileEntity>> pair = new Pair<>(this.getTileData().getString("password"), new ArrayList<>(List.of(this)));
+        EnergyNetwork.ENERGY.channels
+                .get(this.getTileData().getInt("channel")).add(pair);
+        return pair.getSecond();
     }
 
     @Override
     public void reloadSettings(){
         for (KineticTileEntity relatedTileEntity : getConnectedTransmitters()) {
-            relatedTileEntity.detachKinetics();relatedTileEntity.attachKinetics();
+            relatedTileEntity.detachKinetics();
+            relatedTileEntity.setSpeed(0);
+            relatedTileEntity.source = null;
+            relatedTileEntity.setNetwork(relatedTileEntity.getBlockPos().asLong());
+            relatedTileEntity.attachKinetics();
         }
+        getConnectedTransmitters().remove(this);
+        sendData();
+    }
+
+    @Override
+    public void afterReload() {
+        for (KineticTileEntity relatedTileEntity : getConnectedTransmitters()) {
+            relatedTileEntity.detachKinetics();
+            relatedTileEntity.setSpeed(0);
+            relatedTileEntity.source = null;
+            relatedTileEntity.setNetwork(relatedTileEntity.getBlockPos().asLong());
+            relatedTileEntity.attachKinetics();
+        }
+        detachKinetics();
+        setSpeed(0);
+        source = null;
+        setNetwork(worldPosition.asLong());
+        attachKinetics();
     }
 }

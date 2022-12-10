@@ -50,6 +50,6 @@ public class ItemTransmitterBlock extends Block implements ITE<ItemTransmitterTi
     @OnlyIn(value = Dist.CLIENT)
     protected void displayScreen(ItemTransmitterTileEntity te, Player player) {
         if (player instanceof LocalPlayer)
-            ScreenOpener.open(new TransmitterScreen(te, Blocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
+            ScreenOpener.open(new TransmitterScreen(te, Blocks.ITEM_TRANSMITTER_BLOCK.asStack()));
     }
 }
