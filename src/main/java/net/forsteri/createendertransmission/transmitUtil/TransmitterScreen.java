@@ -71,7 +71,7 @@ public class TransmitterScreen extends AbstractSimiScreen {
                 .withShadow();
 
         areaChannel = new SelectionScrollInput(x + 45, y + 21, 109, 18).forOptions(
-                    List.of(Components.translatable("enchantment.level.1"), Components.translatable("enchantment.level.2"), Components.translatable("enchantment.level.3"), Components.translatable("enchantment.level.4"), Components.translatable("enchantment.level.5"), Components.translatable("enchantment.level.6"), Components.translatable("enchantment.level.7"), Components.translatable("enchantment.level.8"), Components.translatable("enchantment.level.9"), Components.translatable("enchantment.level.10"))
+                    List.of(Components.translatable("transmitter.network.1"), Components.translatable("transmitter.network.2"), Components.translatable("transmitter.network.3"), Components.translatable("transmitter.network.4"), Components.translatable("transmitter.network.5"), Components.translatable("transmitter.network.6"), Components.translatable("transmitter.network.7"), Components.translatable("transmitter.network.8"), Components.translatable("transmitter.network.9"), Components.translatable("transmitter.network.10"))
                 )
                 .titled(Lang.translateDirect("gui.transmitter.channel_title").plainCopy())
                 .writingTo(labelChannel)
