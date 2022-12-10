@@ -1,6 +1,5 @@
 package net.forsteri.createendertransmission.blocks.itemTransmitter;
 
-import com.mojang.datafixers.util.Pair;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import net.forsteri.createendertransmission.transmitUtil.ITransmitter;
 import net.minecraft.core.BlockPos;
@@ -18,7 +17,7 @@ public class ItemTransmitterTileEntity extends KineticTileEntity implements ITra
     public LazyOptional<IItemHandler> capability;
     public ItemTransmitterTileEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
-        capability = LazyOptional.of(() -> new ItemTransmitterInventoryHandler(() -> this.getInv().getFirst()));
+        capability = LazyOptional.of(() -> new ItemTransmitterInventoryHandler(this::getInv));
     }
 
     @NotNull
@@ -28,7 +27,7 @@ public class ItemTransmitterTileEntity extends KineticTileEntity implements ITra
         return super.getCapability(cap, side);
     }
 
-    public Pair<ItemStackHandler, LazyOptional<IItemHandler>> getInv(){
+    public ItemStackHandler getInv(){
         return ItemNetwork.ITEM.channels
                 .get(this.getTileData().getInt("channel"))
                 .get(this.getTileData().getInt("password"));

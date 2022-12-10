@@ -8,6 +8,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
 import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderBlock;
 import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyTransmitterBlock;
+import net.forsteri.createendertransmission.blocks.fluidTrasmitter.FluidTransmitterBlock;
 import net.forsteri.createendertransmission.blocks.itemTransmitter.ItemTransmitterBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -47,11 +48,18 @@ public class Blocks {
             REGISTRATE.block("item_transmitter", ItemTransmitterBlock::new)
                     .initialProperties(SharedProperties::softMetal)
                     .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
                     .item()
                     .transform(customItemModel())
                     .addLayer(() -> RenderType::cutoutMipped)
-                    .transform(BlockStressDefaults.setImpact(8))
+                    .register();
+
+    public static final BlockEntry<FluidTransmitterBlock> FLUID_TRANSMITTER_BLOCK =
+            REGISTRATE.block("fluid_transmitter", FluidTransmitterBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .item()
+                    .transform(customItemModel())
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .register();
 
     public static void register(){}
