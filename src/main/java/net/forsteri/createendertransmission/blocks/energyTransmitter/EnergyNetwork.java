@@ -21,6 +21,4 @@ public enum EnergyNetwork {
             channels.add(new ArrayList<>());
         }
     }
-
-    public static void register(){}
 }

@@ -3,15 +3,16 @@ package net.forsteri.createendertransmission;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyNetwork;
+import net.forsteri.createendertransmission.entry.Blocks;
+import net.forsteri.createendertransmission.entry.Packets;
+import net.forsteri.createendertransmission.entry.TileEntities;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.forsteri.createendertransmission.entry.*;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
@@ -40,7 +41,6 @@ public class CreateEnderTransmission {
         // Some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         event.enqueueWork(Packets::registerPackets);
-        EnergyNetwork.register();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
