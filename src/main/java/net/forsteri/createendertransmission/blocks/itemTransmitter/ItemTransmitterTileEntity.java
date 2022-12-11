@@ -1,5 +1,6 @@
 package net.forsteri.createendertransmission.blocks.itemTransmitter;
 
+import com.mojang.datafixers.util.Pair;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import net.forsteri.createendertransmission.transmitUtil.ITransmitter;
 import net.minecraft.core.BlockPos;
@@ -28,9 +29,17 @@ public class ItemTransmitterTileEntity extends KineticTileEntity implements ITra
     }
 
     public ItemStackHandler getInv(){
-        return ItemNetwork.ITEM.channels
-                .get(this.getTileData().getInt("channel"))
-                .get(this.getTileData().getInt("password"));
+        for (Pair<String, ItemStackHandler> pair : ItemNetwork.ITEM.channels
+                .get(this.getTileData().getInt("channel"))){
+            if(pair.getFirst().equals(this.getTileData().getString("password"))){
+                return pair.getSecond();
+            }
+
+        }
+        Pair<String, ItemStackHandler> pair = new Pair<>(this.getTileData().getString("password"), new ItemStackHandler(2));
+        ItemNetwork.ITEM.channels
+                .get(this.getTileData().getInt("channel")).add(pair);
+        return pair.getSecond();
     }
 
     @Override
