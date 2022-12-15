@@ -20,7 +20,7 @@ plugins {
 apply plugin: 'org.spongepowered.mixin'
 
 group = 'createendertransmission'
-version = '1.0'
+version = mod_version
 
 java {
     archivesBaseName = 'createendertransmission'
