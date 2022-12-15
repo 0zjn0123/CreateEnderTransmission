@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createendertransmission:block/item_transmitter"
+    }
+  }
+}

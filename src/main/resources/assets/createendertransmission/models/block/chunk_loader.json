@@ -1,0 +1,6 @@
+{
+	"parent": "block/beacon",
+	"textures": {
+		"beacon": "createendertransmission:block/chunk_loader"
+	}
+}

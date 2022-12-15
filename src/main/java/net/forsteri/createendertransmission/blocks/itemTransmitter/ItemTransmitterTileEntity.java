@@ -42,11 +42,11 @@ public class ItemTransmitterTileEntity extends KineticTileEntity implements ITra
         return pair.getSecond();
     }
 
-    @Override
-    public void setRemoved() {
-        super.setRemoved();
-        capability.invalidate();
-    }
+//    @Override
+//    public void setRemoved() {
+//        super.setRemoved();
+//        capability.invalidate();
+//    }
 
     @Override
     public void reloadSettings() {
