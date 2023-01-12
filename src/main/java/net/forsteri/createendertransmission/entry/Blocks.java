@@ -3,7 +3,6 @@ package net.forsteri.createendertransmission.entry;
 import com.simibubi.create.foundation.block.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
 import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderBlock;
@@ -14,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 public class Blocks {
 
@@ -24,9 +24,12 @@ public class Blocks {
 
     public static final BlockEntry<LoaderBlock> CHUNK_LOADER_BLOCK =
             REGISTRATE.block("chunk_loader", LoaderBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
+                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.DIAMOND_BLOCK)
                     .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.axisBlockProvider(true))
+                    .properties(p -> p.strength(10.0F, 1200.0F))
+                    .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
+                    .transform(pickaxeOnly())
+            //        .blockstate(BlockStateGen.axisBlockProvider(true))
                     .item()
                     .transform(customItemModel())
                     .addLayer(() -> RenderType::cutoutMipped)
@@ -35,8 +38,11 @@ public class Blocks {
 
     public static final BlockEntry<EnergyTransmitterBlock> ENERGY_TRANSMITTER_BLOCK =
             REGISTRATE.block("energy_transmitter", EnergyTransmitterBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
+                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.DIAMOND_BLOCK)
                     .properties(BlockBehaviour.Properties::noOcclusion)
+                    .properties(p -> p.strength(10.0F, 1200.0F))
+                    .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
+                    .transform(pickaxeOnly())
                     .blockstate(BlockStateGen.directionalBlockProvider(true))
                     .item()
                     .transform(customItemModel())
@@ -46,8 +52,11 @@ public class Blocks {
 
     public static final BlockEntry<ItemTransmitterBlock> ITEM_TRANSMITTER_BLOCK =
             REGISTRATE.block("item_transmitter", ItemTransmitterBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
+                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.DIAMOND_BLOCK)
                     .properties(BlockBehaviour.Properties::noOcclusion)
+                    .properties(p -> p.strength(10.0F, 1200.0F))
+                    .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
+                    .transform(pickaxeOnly())
                     .item()
                     .transform(customItemModel())
                     .addLayer(() -> RenderType::cutoutMipped)
@@ -55,8 +64,11 @@ public class Blocks {
 
     public static final BlockEntry<FluidTransmitterBlock> FLUID_TRANSMITTER_BLOCK =
             REGISTRATE.block("fluid_transmitter", FluidTransmitterBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
+                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.DIAMOND_BLOCK)
                     .properties(BlockBehaviour.Properties::noOcclusion)
+                    .properties(p -> p.strength(10.0F, 1200.0F))
+                    .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
+                    .transform(pickaxeOnly())
                     .item()
                     .transform(customItemModel())
                     .addLayer(() -> RenderType::cutoutMipped)
