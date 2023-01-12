@@ -76,13 +76,13 @@ public class TransmitterScreen extends AbstractSimiScreen {
                 .titled(Lang.translateDirect("gui.transmitter.channel_title").plainCopy())
                 .writingTo(labelChannel)
                 .setState(
-                        te.getTileData().contains("channel") ? te.getTileData().getInt("channel") : 0
+                        te.getPersistentData().contains("channel") ? te.getPersistentData().getInt("channel") : 0
                 );
 
         areaTestInput = new TextInputWidget(x + 45, y + 43, 109, 18)
                 .writingTo(labelTestInput)
                 .setState(
-                        te.getTileData().contains("password") ? te.getTileData().getString("password") : ""
+                        te.getPersistentData().contains("password") ? te.getPersistentData().getString("password") : ""
                 );
 
         confirmButton =

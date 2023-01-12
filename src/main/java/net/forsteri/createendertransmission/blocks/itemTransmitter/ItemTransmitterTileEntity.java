@@ -30,15 +30,15 @@ public class ItemTransmitterTileEntity extends KineticTileEntity implements ITra
 
     public ItemStackHandler getInv(){
         for (Pair<String, ItemStackHandler> pair : ItemNetwork.ITEM.channels
-                .get(this.getTileData().getInt("channel"))){
-            if(pair.getFirst().equals(this.getTileData().getString("password"))){
+                .get(this.getPersistentData().getInt("channel"))){
+            if(pair.getFirst().equals(this.getPersistentData().getString("password"))){
                 return pair.getSecond();
             }
 
         }
-        Pair<String, ItemStackHandler> pair = new Pair<>(this.getTileData().getString("password"), new ItemStackHandler(2));
+        Pair<String, ItemStackHandler> pair = new Pair<>(this.getPersistentData().getString("password"), new ItemStackHandler(2));
         ItemNetwork.ITEM.channels
-                .get(this.getTileData().getInt("channel")).add(pair);
+                .get(this.getPersistentData().getInt("channel")).add(pair);
         return pair.getSecond();
     }
 

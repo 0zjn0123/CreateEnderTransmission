@@ -26,8 +26,8 @@ public class EnergyTransmitterTileEntity extends KineticTileEntity implements IT
     @Override
     public boolean isCustomConnection(KineticTileEntity other, BlockState state, BlockState otherState) {
         if(other instanceof EnergyTransmitterTileEntity){
-            return other.getTileData().getInt("channel") == this.getTileData().getInt("channel") &&
-                    other.getTileData().getString("password").equals(this.getTileData().getString("password"));
+            return other.getPersistentData().getInt("channel") == this.getPersistentData().getInt("channel") &&
+                    other.getPersistentData().getString("password").equals(this.getPersistentData().getString("password"));
         }
         return false;
     }
@@ -45,8 +45,8 @@ public class EnergyTransmitterTileEntity extends KineticTileEntity implements IT
 
     public List<KineticTileEntity> getConnectedTransmitters(){
         for (Pair<String, List<KineticTileEntity>> pair : EnergyNetwork.ENERGY.channels
-                .get(this.getTileData().getInt("channel"))){
-            if(pair.getFirst().equals(this.getTileData().getString("password"))) {
+                .get(this.getPersistentData().getInt("channel"))){
+            if(pair.getFirst().equals(this.getPersistentData().getString("password"))) {
                 if(!pair.getSecond().contains(this)) pair.getSecond().add(this);
                 return pair.getSecond();
             }
@@ -56,9 +56,9 @@ public class EnergyTransmitterTileEntity extends KineticTileEntity implements IT
                 EnergyNetwork.ENERGY.channels.remove(pair);
             }
         }
-        Pair<String, List<KineticTileEntity>> pair = new Pair<>(this.getTileData().getString("password"), new ArrayList<>(List.of(this)));
+        Pair<String, List<KineticTileEntity>> pair = new Pair<>(this.getPersistentData().getString("password"), new ArrayList<>(List.of(this)));
         EnergyNetwork.ENERGY.channels
-                .get(this.getTileData().getInt("channel")).add(pair);
+                .get(this.getPersistentData().getInt("channel")).add(pair);
         return pair.getSecond();
     }
 

@@ -42,12 +42,12 @@ public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<Ki
     @Override
     protected void applySettings(KineticTileEntity tileEntity) {
         if(
-                tileEntity.getTileData().getInt("channel") != channel ||
-                        !tileEntity.getTileData().getString("password").equals(password)
+                tileEntity.getPersistentData().getInt("channel") != channel ||
+                        !tileEntity.getPersistentData().getString("password").equals(password)
         ) {
             ((ITransmitter) tileEntity).reloadSettings();
-            tileEntity.getTileData().putInt("channel", channel);
-            tileEntity.getTileData().putString("password", password);
+            tileEntity.getPersistentData().putInt("channel", channel);
+            tileEntity.getPersistentData().putString("password", password);
             tileEntity.detachKinetics();
             tileEntity.attachKinetics();
             ((ITransmitter) tileEntity).afterReload();

@@ -6,9 +6,7 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.forsteri.createendertransmission.entry.Blocks;
 import net.forsteri.createendertransmission.entry.Packets;
 import net.forsteri.createendertransmission.entry.TileEntities;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -52,14 +50,6 @@ public class CreateEnderTransmission {
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            // Register a new block here
-            LOGGER.info("HELLO from Register Block");
-        }
-    }
 
     public static CreateRegistrate registrate() {
         return REGISTRATE.get();

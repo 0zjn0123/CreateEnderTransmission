@@ -25,15 +25,15 @@ public class FluidTransmitterTileEntity extends KineticTileEntity implements ITr
 
     public IFluidHandler getInv(){
         for (Pair<String, IFluidHandler> pair : FluidNetwork.FLUID.channels
-                .get(this.getTileData().getInt("channel"))){
-            if(pair.getFirst().equals(this.getTileData().getString("password"))){
+                .get(this.getPersistentData().getInt("channel"))){
+            if(pair.getFirst().equals(this.getPersistentData().getString("password"))){
                 return pair.getSecond();
             }
 
         }
-        Pair<String, IFluidHandler> pair = new Pair<>(this.getTileData().getString("password"), new SmartFluidTank(1000, (FluidStack contents)->{}));
+        Pair<String, IFluidHandler> pair = new Pair<>(this.getPersistentData().getString("password"), new SmartFluidTank(1000, (FluidStack contents)->{}));
         FluidNetwork.FLUID.channels
-                .get(this.getTileData().getInt("channel")).add(pair);
+                .get(this.getPersistentData().getInt("channel")).add(pair);
         return pair.getSecond();
     }
 
