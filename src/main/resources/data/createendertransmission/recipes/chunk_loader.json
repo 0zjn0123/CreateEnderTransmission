@@ -16,5 +16,10 @@
   "result": {
     "item": "createendertransmission:chunk_loader",
     "count": 1
-  }
+  },
+  "conditions": [
+    {
+      "type": "createendertransmission:allow_chunk_loader"
+    }
+  ]
 }

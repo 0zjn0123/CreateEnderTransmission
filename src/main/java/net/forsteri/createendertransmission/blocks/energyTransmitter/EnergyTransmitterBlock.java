@@ -79,7 +79,6 @@ public class EnergyTransmitterBlock extends DirectionalKineticBlock implements I
             ScreenOpener.open(new TransmitterScreen(te, Blocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
     }
 
-    @SuppressWarnings({"deprecation"})
     @Override
     public void onRemove(BlockState p_60515_, Level p_60516_, BlockPos p_60517_, BlockState p_60518_, boolean p_60519_) {
         if(getTileEntity(p_60516_, p_60517_) != null)
