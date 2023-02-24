@@ -1,0 +1,44 @@
+package net.forsteri.createendertransmission.entry;
+
+import com.google.gson.JsonObject;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
+
+public class ChunkLoaderRecipeCondition implements ICondition{
+
+    public static ResourceLocation ID = new ResourceLocation("createendertransmission", "allow_chunk_loader");
+
+    @Override
+    public ResourceLocation getID() {
+        return ID;
+    }
+
+    @SuppressWarnings("removal")
+    @Override
+    public boolean test() {
+        return Config.CHUNK_LOADER.get();
+    }
+
+    public static class Serializer implements IConditionSerializer<ChunkLoaderRecipeCondition>
+    {
+        public static final ChunkLoaderRecipeCondition.Serializer INSTANCE = new ChunkLoaderRecipeCondition.Serializer();
+
+        @Override
+        public void write(JsonObject json, ChunkLoaderRecipeCondition value)
+        {
+        }
+
+        @Override
+        public ChunkLoaderRecipeCondition read(JsonObject json)
+        {
+            return new ChunkLoaderRecipeCondition();
+        }
+
+        @Override
+        public ResourceLocation getID()
+        {
+            return ChunkLoaderRecipeCondition.ID;
+        }
+    }
+}
