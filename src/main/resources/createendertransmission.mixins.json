@@ -2,9 +2,7 @@
   "required": true,
   "package": "net.forsteri.createendertransmission.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "KineticTransmissionMixin"
-  ],
+  "mixins": [],
   "client": [
   ],
   "minVersion": "0.8"

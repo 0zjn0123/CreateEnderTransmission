@@ -19,11 +19,6 @@ public class EnergyTransmitterTileEntity extends KineticTileEntity implements IT
     }
 
     @Override
-    public void tick() {
-        super.tick();
-    }
-
-    @Override
     public boolean isCustomConnection(KineticTileEntity other, BlockState state, BlockState otherState) {
         if(other instanceof EnergyTransmitterTileEntity){
             return other.getTileData().getInt("channel") == this.getTileData().getInt("channel") &&
@@ -86,10 +81,12 @@ public class EnergyTransmitterTileEntity extends KineticTileEntity implements IT
             relatedTileEntity.detachKinetics();
             relatedTileEntity.attachKinetics();
         }
-        for (KineticTileEntity relatedTileEntity : getConnectedTransmitters()) {
-            relatedTileEntity.detachKinetics();
-            relatedTileEntity.attachKinetics();
-        }
+    }
+
+    @Override
+    public float propagateRotationTo(KineticTileEntity target, BlockState stateFrom, BlockState stateTo, BlockPos diff, boolean connectedViaAxes, boolean connectedViaCogs) {
+        return (target.getTileData().getInt("channel") == this.getTileData().getInt("channel")
+                && target.getTileData().getString("password").equals(this.getTileData().getString("password"))) ? 1f : 0f;
     }
 
 }
