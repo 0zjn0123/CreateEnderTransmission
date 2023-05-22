@@ -1,6 +1,6 @@
 package net.forsteri.createendertransmission.entry;
 
-import com.simibubi.create.foundation.block.BlockStressDefaults;
+import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -9,7 +9,6 @@ import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderBlock;
 import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyTransmitterBlock;
 import net.forsteri.createendertransmission.blocks.fluidTrasmitter.FluidTransmitterBlock;
 import net.forsteri.createendertransmission.blocks.itemTransmitter.ItemTransmitterBlock;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
@@ -29,10 +28,8 @@ public class Blocks {
                     .properties(p -> p.strength(10.0F, 1200.0F))
                     .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                     .transform(pickaxeOnly())
-            //        .blockstate(BlockStateGen.axisBlockProvider(true))
                     .item()
                     .transform(customItemModel())
-                    .addLayer(() -> RenderType::cutoutMipped)
                     .transform(BlockStressDefaults.setImpact(8))
                     .register();
 
@@ -46,7 +43,6 @@ public class Blocks {
                     .blockstate(BlockStateGen.directionalBlockProvider(true))
                     .item()
                     .transform(customItemModel())
-                    .addLayer(() -> RenderType::cutoutMipped)
                     .transform(BlockStressDefaults.setImpact(8))
                     .register();
 
@@ -59,7 +55,6 @@ public class Blocks {
                     .transform(pickaxeOnly())
                     .item()
                     .transform(customItemModel())
-                    .addLayer(() -> RenderType::cutoutMipped)
                     .register();
 
     public static final BlockEntry<FluidTransmitterBlock> FLUID_TRANSMITTER_BLOCK =
@@ -71,7 +66,6 @@ public class Blocks {
                     .transform(pickaxeOnly())
                     .item()
                     .transform(customItemModel())
-                    .addLayer(() -> RenderType::cutoutMipped)
                     .register();
 
     public static void register(){}

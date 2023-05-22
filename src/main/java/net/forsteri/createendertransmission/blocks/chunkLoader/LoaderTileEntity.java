@@ -1,6 +1,6 @@
 package net.forsteri.createendertransmission.blocks.chunkLoader;
 
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.world.ForgeChunkManager;
 
 
-public class LoaderTileEntity extends KineticTileEntity {
+public class LoaderTileEntity extends KineticBlockEntity {
     public LoaderTileEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
     }

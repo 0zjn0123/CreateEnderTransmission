@@ -12,6 +12,5 @@ public class Config {
         CHUNK_LOADER = BUILDER.comment("Enable the chunk loader").define("chunkLoader", true);
         BUILDER.pop();
         SPEC = BUILDER.build();
-
     }
 }

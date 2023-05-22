@@ -1,7 +1,7 @@
 package net.forsteri.createendertransmission.entry;
 
-import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
-import com.simibubi.create.content.contraptions.relays.encased.ShaftInstance;
+import com.simibubi.create.content.kinetics.base.ShaftInstance;
+import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
@@ -17,26 +17,26 @@ public class TileEntities {
             .registrate();
 
     public static final BlockEntityEntry<LoaderTileEntity> CHUNK_LOADER_TILE = REGISTRATE
-            .tileEntity("chunk_loader", LoaderTileEntity::new)
+            .blockEntity("chunk_loader", LoaderTileEntity::new)
             .instance(() -> LoaderInstance::new, false)
             .validBlocks(Blocks.CHUNK_LOADER_BLOCK)
-            .renderer(() -> KineticTileEntityRenderer::new)
+            .renderer(() -> SmartBlockEntityRenderer::new)
             .register();
 
     public static final BlockEntityEntry<EnergyTransmitterTileEntity> ENERGY_TRANSMITTER_TILE = REGISTRATE
-            .tileEntity("energy_transmitter", EnergyTransmitterTileEntity::new)
+            .blockEntity("energy_transmitter", EnergyTransmitterTileEntity::new)
             .instance(() -> ShaftInstance::new, false)
             .validBlocks(Blocks.ENERGY_TRANSMITTER_BLOCK)
-            .renderer(() -> KineticTileEntityRenderer::new)
+            .renderer(() -> SmartBlockEntityRenderer::new)
             .register();
 
     public static final BlockEntityEntry<ItemTransmitterTileEntity> ITEM_TRANSMITTER_TILE_ENTITY = REGISTRATE
-            .tileEntity("item_transmitter", ItemTransmitterTileEntity::new)
+            .blockEntity("item_transmitter", ItemTransmitterTileEntity::new)
             .validBlocks(Blocks.ITEM_TRANSMITTER_BLOCK)
             .register();
 
     public static final BlockEntityEntry<FluidTransmitterTileEntity> FLUID_TRANSMITTER_TILE_ENTITY = REGISTRATE
-            .tileEntity("fluid_transmitter", FluidTransmitterTileEntity::new)
+            .blockEntity("fluid_transmitter", FluidTransmitterTileEntity::new)
             .validBlocks(Blocks.FLUID_TRANSMITTER_BLOCK)
             .register();
 

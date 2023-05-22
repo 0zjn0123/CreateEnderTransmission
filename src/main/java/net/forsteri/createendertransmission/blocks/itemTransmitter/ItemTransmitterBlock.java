@@ -1,6 +1,7 @@
 package net.forsteri.createendertransmission.blocks.itemTransmitter;
 
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
+import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.gui.ScreenOpener;
 import net.forsteri.createendertransmission.entry.Blocks;
 import net.forsteri.createendertransmission.entry.TileEntities;
@@ -23,18 +24,18 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemTransmitterBlock extends Block implements ITE<ItemTransmitterTileEntity> {
+public class ItemTransmitterBlock extends Block implements IBE<ItemTransmitterTileEntity>, IWrenchable {
     public ItemTransmitterBlock(Properties properties) {
         super(properties);
     }
 
     @Override
-    public Class<ItemTransmitterTileEntity> getTileEntityClass() {
+    public Class<ItemTransmitterTileEntity> getBlockEntityClass() {
         return ItemTransmitterTileEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends ItemTransmitterTileEntity> getTileEntityType() {
+    public BlockEntityType<? extends ItemTransmitterTileEntity> getBlockEntityType() {
         return TileEntities.ITEM_TRANSMITTER_TILE_ENTITY.get();
     }
 
@@ -43,7 +44,7 @@ public class ItemTransmitterBlock extends Block implements ITE<ItemTransmitterTi
     public @NotNull InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
                                           BlockHitResult hit) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> () -> withTileEntityDo(worldIn, pos, te -> this.displayScreen(te, player)));
+                () -> () -> withBlockEntityDo(worldIn, pos, te -> this.displayScreen(te, player)));
         return InteractionResult.SUCCESS;
     }
 

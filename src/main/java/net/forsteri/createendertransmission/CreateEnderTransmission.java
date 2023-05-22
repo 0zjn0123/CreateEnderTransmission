@@ -2,7 +2,6 @@ package net.forsteri.createendertransmission;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.forsteri.createendertransmission.entry.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -33,6 +32,9 @@ public class CreateEnderTransmission {
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
+        REGISTRATE.registerEventListeners(FMLJavaModLoadingContext.get()
+                .getModEventBus());
+
         Blocks.register();
         TileEntities.register();
         Packets.registerPackets();
@@ -58,11 +60,10 @@ public class CreateEnderTransmission {
     // Event bus for receiving Registry Events)
 
     public static CreateRegistrate registrate() {
-        return REGISTRATE.get();
+        return REGISTRATE;
     }
 
-    @SuppressWarnings("removal")
-    public static final NonNullSupplier<CreateRegistrate> REGISTRATE = CreateRegistrate.lazy(CreateEnderTransmission.MOD_ID);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(CreateEnderTransmission.MOD_ID);
 
     public void registerRecipeSerializers(RegisterEvent event)
     {

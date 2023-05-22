@@ -1,7 +1,7 @@
 package net.forsteri.createendertransmission.blocks.fluidTrasmitter;
 
 import com.mojang.datafixers.util.Pair;
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import net.forsteri.createendertransmission.transmitUtil.ITransmitter;
 import net.minecraft.core.BlockPos;
@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FluidTransmitterTileEntity extends KineticTileEntity implements ITransmitter {
+public class FluidTransmitterTileEntity extends KineticBlockEntity implements ITransmitter {
     public LazyOptional<IFluidHandler> capability;
 
     public FluidTransmitterTileEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
