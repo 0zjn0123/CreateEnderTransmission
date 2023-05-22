@@ -1,5 +1,6 @@
 package net.forsteri.createendertransmission.blocks.fluidTrasmitter;
 
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.gui.ScreenOpener;
 import net.forsteri.createendertransmission.entry.Blocks;
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class FluidTransmitterBlock extends Block implements IBE<FluidTransmitterTileEntity> {
+public class FluidTransmitterBlock extends Block implements IBE<FluidTransmitterTileEntity>, IWrenchable {
     public FluidTransmitterBlock(Properties properties) {
         super(properties);
     }

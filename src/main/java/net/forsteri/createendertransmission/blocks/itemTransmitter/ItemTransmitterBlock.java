@@ -1,5 +1,6 @@
 package net.forsteri.createendertransmission.blocks.itemTransmitter;
 
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.gui.ScreenOpener;
 import net.forsteri.createendertransmission.entry.Blocks;
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemTransmitterBlock extends Block implements IBE<ItemTransmitterTileEntity> {
+public class ItemTransmitterBlock extends Block implements IBE<ItemTransmitterTileEntity>, IWrenchable {
     public ItemTransmitterBlock(Properties properties) {
         super(properties);
     }

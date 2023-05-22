@@ -1,5 +1,6 @@
 package net.forsteri.createendertransmission.blocks.chunkLoader;
 
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
@@ -14,7 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.world.ForgeChunkManager;
 
-public class LoaderBlock extends KineticBlock implements IBE<LoaderTileEntity> {
+public class LoaderBlock extends KineticBlock implements IBE<LoaderTileEntity>, IWrenchable {
     public LoaderBlock(Properties properties) {
         super(properties);
     }

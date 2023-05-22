@@ -1,6 +1,7 @@
 package net.forsteri.createendertransmission.blocks.energyTransmitter;
 
 import com.simibubi.create.AllItems;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.foundation.block.IBE;
@@ -30,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 @ParametersAreNonnullByDefault
-public class EnergyTransmitterBlock extends DirectionalKineticBlock implements IBE<EnergyTransmitterTileEntity> {
+public class EnergyTransmitterBlock extends DirectionalKineticBlock implements IBE<EnergyTransmitterTileEntity>, IWrenchable {
     public EnergyTransmitterBlock(Properties properties) {
         super(properties);
     }

@@ -30,6 +30,9 @@ public class CreateEnderTransmission {
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
+        REGISTRATE.registerEventListeners(FMLJavaModLoadingContext.get()
+                .getModEventBus());
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
