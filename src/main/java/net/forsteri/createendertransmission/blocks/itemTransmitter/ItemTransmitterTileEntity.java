@@ -1,7 +1,7 @@
 package net.forsteri.createendertransmission.blocks.itemTransmitter;
 
 import com.mojang.datafixers.util.Pair;
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.forsteri.createendertransmission.transmitUtil.ITransmitter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,7 +13,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class ItemTransmitterTileEntity extends KineticTileEntity implements ITransmitter {
+public class ItemTransmitterTileEntity extends KineticBlockEntity implements ITransmitter {
 
     public LazyOptional<IItemHandler> capability;
     public ItemTransmitterTileEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
@@ -41,12 +41,6 @@ public class ItemTransmitterTileEntity extends KineticTileEntity implements ITra
                 .get(this.getTileData().getInt("channel")).add(pair);
         return pair.getSecond();
     }
-
-//    @Override
-//    public void setRemoved() {
-//        super.setRemoved();
-//        capability.invalidate();
-//    }
 
     @Override
     public void reloadSettings() {

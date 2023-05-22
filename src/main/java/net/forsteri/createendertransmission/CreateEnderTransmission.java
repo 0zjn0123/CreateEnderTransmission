@@ -2,7 +2,6 @@ package net.forsteri.createendertransmission;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.forsteri.createendertransmission.entry.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
@@ -67,11 +66,10 @@ public class CreateEnderTransmission {
     }
 
     public static CreateRegistrate registrate() {
-        return REGISTRATE.get();
+        return REGISTRATE;
     }
 
-    @SuppressWarnings("removal")
-    public static final NonNullSupplier<CreateRegistrate> REGISTRATE = CreateRegistrate.lazy(CreateEnderTransmission.MOD_ID);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(CreateEnderTransmission.MOD_ID);
 
     public void registerRecipeSerializers(RegistryEvent.Register<RecipeSerializer<?>> event)
     {

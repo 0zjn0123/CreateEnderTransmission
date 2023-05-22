@@ -1,12 +1,12 @@
 package net.forsteri.createendertransmission.transmitUtil;
 
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.foundation.networking.TileEntityConfigurationPacket;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.foundation.networking.BlockEntityConfigurationPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 
-public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<KineticTileEntity> {
+public class ConfigureTransmitterPacket extends BlockEntityConfigurationPacket<KineticBlockEntity> {
 
     private int channel;
     private String password;
@@ -40,7 +40,7 @@ public class ConfigureTransmitterPacket extends TileEntityConfigurationPacket<Ki
     }
 
     @Override
-    protected void applySettings(KineticTileEntity tileEntity) {
+    protected void applySettings(KineticBlockEntity tileEntity) {
         if(
                 tileEntity.getTileData().getInt("channel") != channel ||
                         !tileEntity.getTileData().getString("password").equals(password)

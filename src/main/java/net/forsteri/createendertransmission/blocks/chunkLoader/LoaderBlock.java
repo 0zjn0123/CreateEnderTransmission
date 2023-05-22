@@ -1,7 +1,7 @@
 package net.forsteri.createendertransmission.blocks.chunkLoader;
 
-import com.simibubi.create.content.contraptions.base.KineticBlock;
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.content.kinetics.base.KineticBlock;
+import com.simibubi.create.foundation.block.IBE;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
 import net.forsteri.createendertransmission.entry.TileEntities;
 import net.minecraft.core.BlockPos;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.world.ForgeChunkManager;
 
-public class LoaderBlock extends KineticBlock implements ITE<LoaderTileEntity> {
+public class LoaderBlock extends KineticBlock implements IBE<LoaderTileEntity> {
     public LoaderBlock(Properties properties) {
         super(properties);
     }
@@ -22,16 +22,6 @@ public class LoaderBlock extends KineticBlock implements ITE<LoaderTileEntity> {
     @Override
     public Direction.Axis getRotationAxis(BlockState state) {
         return Direction.Axis.Y;
-    }
-
-    @Override
-    public Class<LoaderTileEntity> getTileEntityClass() {
-        return LoaderTileEntity.class;
-    }
-
-    @Override
-    public BlockEntityType<? extends LoaderTileEntity> getTileEntityType() {
-        return TileEntities.CHUNK_LOADER_TILE.get();
     }
 
     @Override
@@ -51,5 +41,15 @@ public class LoaderBlock extends KineticBlock implements ITE<LoaderTileEntity> {
                 true
         );
         super.onRemove(state, worldIn, pos, newState, isMoving);
+    }
+
+    @Override
+    public Class<LoaderTileEntity> getBlockEntityClass() {
+        return LoaderTileEntity.class;
+    }
+
+    @Override
+    public BlockEntityType<? extends LoaderTileEntity> getBlockEntityType() {
+        return TileEntities.CHUNK_LOADER_TILE.get();
     }
 }

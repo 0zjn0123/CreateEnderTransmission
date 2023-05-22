@@ -15,11 +15,6 @@ public enum FluidNetwork {
         this.channels = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             channels.add(new ArrayList<>());
-//            for (int j = 0; j < yDim; j++) {
-//                channels.get(i).add(
-//                        new SmartFluidTank(1000, (FluidStack contents)->{})
-//                );
-//            }
         }
     }
 }

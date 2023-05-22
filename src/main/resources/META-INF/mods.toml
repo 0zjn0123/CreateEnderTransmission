@@ -62,6 +62,6 @@ Well, this mod is for you!
 [[dependencies.createendertransmission]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.0.e,)"
+    versionRange="[0.5.1.a,)"
     ordering="NONE"
     side="BOTH"

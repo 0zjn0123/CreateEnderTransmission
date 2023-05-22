@@ -1,7 +1,7 @@
 package net.forsteri.createendertransmission.transmitUtil;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.gui.AbstractSimiScreen;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.AllIcons;
@@ -20,11 +20,11 @@ import java.util.List;
 @SuppressWarnings("FieldCanBeLocal")
 public class TransmitterScreen extends AbstractSimiScreen {
 
-    public KineticTileEntity te;
+    public KineticBlockEntity te;
 
     public ItemStack renderedItem;
 
-    public TransmitterScreen(KineticTileEntity te, ItemStack renderedItem) {
+    public TransmitterScreen(KineticBlockEntity te, ItemStack renderedItem) {
         super(Lang.translateDirect("gui.sequenced_gearshift.title"));
         this.te = te;
         this.renderedItem = renderedItem;

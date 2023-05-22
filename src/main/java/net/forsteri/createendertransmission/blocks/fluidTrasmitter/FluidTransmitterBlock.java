@@ -1,6 +1,6 @@
 package net.forsteri.createendertransmission.blocks.fluidTrasmitter;
 
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.gui.ScreenOpener;
 import net.forsteri.createendertransmission.entry.Blocks;
 import net.forsteri.createendertransmission.entry.TileEntities;
@@ -23,19 +23,9 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class FluidTransmitterBlock extends Block implements ITE<FluidTransmitterTileEntity> {
+public class FluidTransmitterBlock extends Block implements IBE<FluidTransmitterTileEntity> {
     public FluidTransmitterBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    public Class<FluidTransmitterTileEntity> getTileEntityClass() {
-        return FluidTransmitterTileEntity.class;
-    }
-
-    @Override
-    public BlockEntityType<? extends FluidTransmitterTileEntity> getTileEntityType() {
-        return TileEntities.FLUID_TRANSMITTER_TILE_ENTITY.get();
     }
 
     @SuppressWarnings("deprecation")
@@ -43,7 +33,7 @@ public class FluidTransmitterBlock extends Block implements ITE<FluidTransmitter
     public @NotNull InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
                                           BlockHitResult hit) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> () -> withTileEntityDo(worldIn, pos, te -> this.displayScreen(te, player)));
+                () -> () -> withBlockEntityDo(worldIn, pos, te -> this.displayScreen(te, player)));
         return InteractionResult.SUCCESS;
     }
 
@@ -51,5 +41,15 @@ public class FluidTransmitterBlock extends Block implements ITE<FluidTransmitter
     protected void displayScreen(FluidTransmitterTileEntity te, Player player) {
         if (player instanceof LocalPlayer)
             ScreenOpener.open(new TransmitterScreen(te, Blocks.FLUID_TRANSMITTER_BLOCK.asStack()));
+    }
+
+    @Override
+    public Class<FluidTransmitterTileEntity> getBlockEntityClass() {
+        return FluidTransmitterTileEntity.class;
+    }
+
+    @Override
+    public BlockEntityType<? extends FluidTransmitterTileEntity> getBlockEntityType() {
+        return TileEntities.FLUID_TRANSMITTER_TILE_ENTITY.get();
     }
 }

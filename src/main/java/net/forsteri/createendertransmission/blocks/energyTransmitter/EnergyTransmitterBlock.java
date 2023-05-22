@@ -1,9 +1,9 @@
 package net.forsteri.createendertransmission.blocks.energyTransmitter;
 
 import com.simibubi.create.AllItems;
-import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
-import com.simibubi.create.content.contraptions.base.KineticBlock;
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
+import com.simibubi.create.content.kinetics.base.KineticBlock;
+import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.gui.ScreenOpener;
 import net.forsteri.createendertransmission.entry.Blocks;
 import net.forsteri.createendertransmission.entry.TileEntities;
@@ -30,19 +30,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 @ParametersAreNonnullByDefault
-public class EnergyTransmitterBlock extends DirectionalKineticBlock implements ITE<EnergyTransmitterTileEntity> {
+public class EnergyTransmitterBlock extends DirectionalKineticBlock implements IBE<EnergyTransmitterTileEntity> {
     public EnergyTransmitterBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    public Class<EnergyTransmitterTileEntity> getTileEntityClass() {
-        return EnergyTransmitterTileEntity.class;
-    }
-
-    @Override
-    public BlockEntityType<? extends EnergyTransmitterTileEntity> getTileEntityType() {
-        return TileEntities.ENERGY_TRANSMITTER_TILE.get();
     }
 
     @Override
@@ -69,7 +59,7 @@ public class EnergyTransmitterBlock extends DirectionalKineticBlock implements I
         }
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> () -> withTileEntityDo(worldIn, pos, te -> this.displayScreen(te, player)));
+                () -> () -> withBlockEntityDo(worldIn, pos, te -> this.displayScreen(te, player)));
         return InteractionResult.SUCCESS;
     }
 
@@ -79,11 +69,20 @@ public class EnergyTransmitterBlock extends DirectionalKineticBlock implements I
             ScreenOpener.open(new TransmitterScreen(te, Blocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
     }
 
-    @SuppressWarnings({"deprecation"})
     @Override
     public void onRemove(BlockState p_60515_, Level p_60516_, BlockPos p_60517_, BlockState p_60518_, boolean p_60519_) {
-        if(getTileEntity(p_60516_, p_60517_) != null)
-            Objects.requireNonNull(getTileEntity(p_60516_, p_60517_)).getConnectedTransmitters().remove(getTileEntity(p_60516_, p_60517_));
+        if(getBlockEntity(p_60516_, p_60517_) != null)
+            Objects.requireNonNull(getBlockEntity(p_60516_, p_60517_)).getConnectedTransmitters().remove(getBlockEntity(p_60516_, p_60517_));
         super.onRemove(p_60515_, p_60516_, p_60517_, p_60518_, p_60519_);
+    }
+
+    @Override
+    public Class<EnergyTransmitterTileEntity> getBlockEntityClass() {
+        return EnergyTransmitterTileEntity.class;
+    }
+
+    @Override
+    public BlockEntityType<? extends EnergyTransmitterTileEntity> getBlockEntityType() {
+        return TileEntities.ENERGY_TRANSMITTER_TILE.get();
     }
 }
