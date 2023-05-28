@@ -9,6 +9,7 @@ import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderBlock;
 import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyTransmitterBlock;
 import net.forsteri.createendertransmission.blocks.fluidTrasmitter.FluidTransmitterBlock;
 import net.forsteri.createendertransmission.blocks.itemTransmitter.ItemTransmitterBlock;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
@@ -31,6 +32,7 @@ public class Blocks {
                     .item()
                     .transform(customItemModel())
                     .transform(BlockStressDefaults.setImpact(8))
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .register();
 
     public static final BlockEntry<EnergyTransmitterBlock> ENERGY_TRANSMITTER_BLOCK =
