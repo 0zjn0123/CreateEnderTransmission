@@ -1,0 +1,20 @@
+{
+  "itemGroup.ender_transmission":"Create Ender Transmission",
+  "block.createendertransmission.chunk_loader": "Cargador de chunks",
+  "block.createendertransmission.energy_transmitter": "Transmisor de energía",
+  "block.createendertransmission.item_transmitter": "Transmisor de items",
+  "block.createendertransmission.fluid_transmitter": "Transmisor de fluidos",
+
+  "transmitter.network.1": "1",
+  "transmitter.network.2": "2",
+  "transmitter.network.3": "3",
+  "transmitter.network.4": "4",
+  "transmitter.network.5": "5",
+  "transmitter.network.6": "6",
+  "transmitter.network.7": "7",
+  "transmitter.network.8": "8",
+  "transmitter.network.9": "9",
+  "transmitter.network.10": "10",
+
+  "create.gui.transmitter.channel_title": "Network"
+}
