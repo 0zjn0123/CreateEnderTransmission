@@ -6,8 +6,8 @@ import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.gui.ScreenOpener;
-import net.forsteri.createendertransmission.entry.Blocks;
-import net.forsteri.createendertransmission.entry.TileEntities;
+import net.forsteri.createendertransmission.entry.TransmissionBlocks;
+import net.forsteri.createendertransmission.entry.TransmissionBlockEntities;
 import net.forsteri.createendertransmission.transmitUtil.TransmitterScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 @ParametersAreNonnullByDefault
-public class EnergyTransmitterBlock extends DirectionalKineticBlock implements IBE<EnergyTransmitterTileEntity>, IWrenchable {
+public class EnergyTransmitterBlock extends DirectionalKineticBlock implements IBE<EnergyTransmitterBlockEntity>, IWrenchable {
     public EnergyTransmitterBlock(Properties properties) {
         super(properties);
     }
@@ -65,9 +65,9 @@ public class EnergyTransmitterBlock extends DirectionalKineticBlock implements I
     }
 
     @OnlyIn(value = Dist.CLIENT)
-    protected void displayScreen(EnergyTransmitterTileEntity te, Player player) {
+    protected void displayScreen(EnergyTransmitterBlockEntity te, Player player) {
         if (player instanceof LocalPlayer)
-            ScreenOpener.open(new TransmitterScreen(te, Blocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
+            ScreenOpener.open(new TransmitterScreen(te, TransmissionBlocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
     }
 
     @Override
@@ -78,12 +78,12 @@ public class EnergyTransmitterBlock extends DirectionalKineticBlock implements I
     }
 
     @Override
-    public Class<EnergyTransmitterTileEntity> getBlockEntityClass() {
-        return EnergyTransmitterTileEntity.class;
+    public Class<EnergyTransmitterBlockEntity> getBlockEntityClass() {
+        return EnergyTransmitterBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends EnergyTransmitterTileEntity> getBlockEntityType() {
-        return TileEntities.ENERGY_TRANSMITTER_TILE.get();
+    public BlockEntityType<? extends EnergyTransmitterBlockEntity> getBlockEntityType() {
+        return TransmissionBlockEntities.ENERGY_TRANSMITTER_TILE.get();
     }
 }

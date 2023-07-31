@@ -1,7 +1,0 @@
-{
-	"parent": "create:block/encased_shaft/block",
-	"textures": {
-		"casing": "createendertransmission:block/ender_casing",
-		"opening": "create:block/shadow_steel_casing"
-	}
-}

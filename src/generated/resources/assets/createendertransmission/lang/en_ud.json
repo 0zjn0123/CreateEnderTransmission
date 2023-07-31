@@ -1,0 +1,19 @@
+{
+  "block.createendertransmission.chunk_loader": "\u0279\u01DDp\u0250o\uA780 \u029Eun\u0265\u0186",
+  "block.createendertransmission.energy_transmitter": "\u0279\u01DD\u0287\u0287\u0131\u026Fsu\u0250\u0279\u27D8 \u028Eb\u0279\u01DDu\u018E",
+  "block.createendertransmission.fluid_transmitter": "\u0279\u01DD\u0287\u0287\u0131\u026Fsu\u0250\u0279\u27D8 p\u0131n\u05DF\u2132",
+  "block.createendertransmission.item_transmitter": "\u0279\u01DD\u0287\u0287\u0131\u026Fsu\u0250\u0279\u27D8 \u026F\u01DD\u0287I",
+  "create.gui.transmitter.channel_title": "\u029E\u0279o\u028D\u0287\u01DDN",
+  "createendertransmission.chunk_loader.loaded": "\u028Eq\u0279\u0250\u01DDu s\u029Eun\u0265\u0254 %1$s p\u01DDp\u0250o\u05DF \u0279\u01DDp\u0250o\u05DF \u029Eun\u0265\u0186",
+  "itemGroup.ender_transmission": "uo\u0131ss\u0131\u026Fsu\u0250\u0279\u27D8 \u0279\u01DDpu\u018E \u01DD\u0287\u0250\u01DD\u0279\u0186",
+  "transmitter.network.1": "\u0196",
+  "transmitter.network.10": "0\u0196",
+  "transmitter.network.2": "\u1105",
+  "transmitter.network.3": "\u0190",
+  "transmitter.network.4": "\u3123",
+  "transmitter.network.5": "\u03DB",
+  "transmitter.network.6": "9",
+  "transmitter.network.7": "\u3125",
+  "transmitter.network.8": "8",
+  "transmitter.network.9": "6"
+}

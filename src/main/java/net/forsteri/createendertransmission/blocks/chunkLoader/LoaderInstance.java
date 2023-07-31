@@ -7,8 +7,8 @@ import com.simibubi.create.content.kinetics.base.SingleRotatingInstance;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
 import net.minecraft.core.Direction;
 
-public class LoaderInstance extends SingleRotatingInstance<LoaderTileEntity> {
-    public LoaderInstance(MaterialManager modelManager, LoaderTileEntity tileEntity) {
+public class LoaderInstance extends SingleRotatingInstance<LoaderBlockEntity> {
+    public LoaderInstance(MaterialManager modelManager, LoaderBlockEntity tileEntity) {
         super(modelManager, tileEntity);
     }
 

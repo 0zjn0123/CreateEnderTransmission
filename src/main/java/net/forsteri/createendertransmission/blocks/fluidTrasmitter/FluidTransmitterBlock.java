@@ -3,8 +3,8 @@ package net.forsteri.createendertransmission.blocks.fluidTrasmitter;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.gui.ScreenOpener;
-import net.forsteri.createendertransmission.entry.Blocks;
-import net.forsteri.createendertransmission.entry.TileEntities;
+import net.forsteri.createendertransmission.entry.TransmissionBlocks;
+import net.forsteri.createendertransmission.entry.TransmissionBlockEntities;
 import net.forsteri.createendertransmission.transmitUtil.TransmitterScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
@@ -24,7 +24,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class FluidTransmitterBlock extends Block implements IBE<FluidTransmitterTileEntity>, IWrenchable {
+public class FluidTransmitterBlock extends Block implements IBE<FluidTransmitterBlockEntity>, IWrenchable {
+
     public FluidTransmitterBlock(Properties properties) {
         super(properties);
     }
@@ -39,18 +40,18 @@ public class FluidTransmitterBlock extends Block implements IBE<FluidTransmitter
     }
 
     @OnlyIn(value = Dist.CLIENT)
-    protected void displayScreen(FluidTransmitterTileEntity te, Player player) {
+    protected void displayScreen(FluidTransmitterBlockEntity te, Player player) {
         if (player instanceof LocalPlayer)
-            ScreenOpener.open(new TransmitterScreen(te, Blocks.FLUID_TRANSMITTER_BLOCK.asStack()));
+            ScreenOpener.open(new TransmitterScreen(te, TransmissionBlocks.FLUID_TRANSMITTER_BLOCK.asStack()));
     }
 
     @Override
-    public Class<FluidTransmitterTileEntity> getBlockEntityClass() {
-        return FluidTransmitterTileEntity.class;
+    public Class<FluidTransmitterBlockEntity> getBlockEntityClass() {
+        return FluidTransmitterBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends FluidTransmitterTileEntity> getBlockEntityType() {
-        return TileEntities.FLUID_TRANSMITTER_TILE_ENTITY.get();
+    public BlockEntityType<? extends FluidTransmitterBlockEntity> getBlockEntityType() {
+        return TransmissionBlockEntities.FLUID_TRANSMITTER_TILE_ENTITY.get();
     }
 }

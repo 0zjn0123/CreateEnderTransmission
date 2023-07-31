@@ -2,12 +2,13 @@ package net.forsteri.createendertransmission.entry;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-public class Tab {
+public class TransmissionTab {
     public static final CreativeModeTab TAB = new CreativeModeTab("ender_transmission") {
         @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(net.forsteri.createendertransmission.entry.Blocks.CHUNK_LOADER_BLOCK.get());
+        public @NotNull ItemStack makeIcon() {
+            return new ItemStack(TransmissionBlocks.CHUNK_LOADER_BLOCK.get());
         }
     };
 }

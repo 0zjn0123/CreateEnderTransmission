@@ -1,6 +1,7 @@
-package net.forsteri.createendertransmission.entry;
+package net.forsteri.createendertransmission.transmitUtil;
 
 import com.google.gson.JsonObject;
+import net.forsteri.createendertransmission.entry.TransmissionConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
@@ -17,7 +18,7 @@ public class ChunkLoaderRecipeCondition implements ICondition{
     @SuppressWarnings("removal")
     @Override
     public boolean test() {
-        return Config.CHUNK_LOADER.get();
+        return TransmissionConfig.CHUNK_LOADER.get();
     }
 
     public static class Serializer implements IConditionSerializer<ChunkLoaderRecipeCondition>
