@@ -2,6 +2,8 @@ package net.forsteri.createendertransmission.blocks.fluidTrasmitter;
 
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.utility.Iterate;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.wrapper.EmptyHandler;
@@ -11,17 +13,21 @@ import java.util.function.Supplier;
 
 public class FluidTransmitterInventoryHandler extends CombinedTankWrapper {
 
-    protected final Supplier<IFluidHandler> superWrapper;
+    protected final Supplier<INBTSerializable<CompoundTag>> superWrapper;
 
-    public FluidTransmitterInventoryHandler(Supplier<IFluidHandler> handlers) {
-        super(handlers.get());
+    public FluidTransmitterInventoryHandler(Supplier<INBTSerializable<CompoundTag>> handlers) {
+        super((IFluidHandler) handlers.get());
         superWrapper = handlers;
+    }
+
+    public IFluidHandler superWrapper() {
+        return ((IFluidHandler) superWrapper.get());
     }
 
     protected IFluidHandler getHandlerFromIndex(int index) {
         if (index != 0)
             return (IFluidHandler) EmptyHandler.INSTANCE;
-        return superWrapper.get();
+        return superWrapper();
     }
 
     @Override
@@ -32,7 +38,7 @@ public class FluidTransmitterInventoryHandler extends CombinedTankWrapper {
         FluidStack drained = FluidStack.EMPTY;
         resource = resource.copy();
 
-        IFluidHandler iFluidHandler = superWrapper.get();
+        IFluidHandler iFluidHandler = superWrapper();
         FluidStack drainedFromCurrent = iFluidHandler.drain(resource, action);
         int amount = drainedFromCurrent.getAmount();
         resource.shrink(amount);
@@ -48,7 +54,7 @@ public class FluidTransmitterInventoryHandler extends CombinedTankWrapper {
     public @NotNull FluidStack drain(int maxDrain, FluidAction action) {
         FluidStack drained = FluidStack.EMPTY;
 
-        IFluidHandler iFluidHandler = superWrapper.get();
+        IFluidHandler iFluidHandler = superWrapper();
         FluidStack drainedFromCurrent = iFluidHandler.drain(maxDrain, action);
         int amount = drainedFromCurrent.getAmount();
 
@@ -69,7 +75,7 @@ public class FluidTransmitterInventoryHandler extends CombinedTankWrapper {
 
         boolean fittingHandlerFound = false;
         for (boolean searchPass : Iterate.trueAndFalse) {
-            IFluidHandler iFluidHandler = superWrapper.get();
+            IFluidHandler iFluidHandler = superWrapper();
 
             for (int i = 0; i < iFluidHandler.getTanks(); i++)
                 if (searchPass && iFluidHandler.getFluidInTank(i)

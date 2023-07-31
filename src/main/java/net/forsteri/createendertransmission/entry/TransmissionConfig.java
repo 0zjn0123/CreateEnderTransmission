@@ -2,7 +2,7 @@ package net.forsteri.createendertransmission.entry;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class Config {
+public class TransmissionConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.BooleanValue CHUNK_LOADER;

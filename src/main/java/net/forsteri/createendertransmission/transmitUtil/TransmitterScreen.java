@@ -12,7 +12,8 @@ import com.simibubi.create.foundation.gui.widget.ScrollInput;
 import com.simibubi.create.foundation.gui.widget.SelectionScrollInput;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Lang;
-import net.forsteri.createendertransmission.entry.Packets;
+import net.forsteri.createendertransmission.entry.TransmissionPackets;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -35,11 +36,9 @@ public class TransmitterScreen extends AbstractSimiScreen {
 
     private Label labelChannel;
 
-    private Label labelTestInput;
-
     private ScrollInput areaChannel;
 
-    private TextInputWidget areaTestInput;
+    private EditBox areaTestInput;
 
     @Override
     protected void renderWindow(PoseStack ms, int mouseX, int mouseY, float partialTicks) {
@@ -67,23 +66,22 @@ public class TransmitterScreen extends AbstractSimiScreen {
         labelChannel = new Label(x + 49, y + 28, Components.immutableEmpty()).colored(0xFFFFFFFF)
                 .withShadow();
 
-        labelTestInput = new Label(x + 49, y + 50, Components.immutableEmpty()).colored(0xFFFFFFFF)
-                .withShadow();
-
         areaChannel = new SelectionScrollInput(x + 45, y + 21, 109, 18).forOptions(
-                    List.of(Components.translatable("transmitter.network.1"), Components.translatable("transmitter.network.2"), Components.translatable("transmitter.network.3"), Components.translatable("transmitter.network.4"), Components.translatable("transmitter.network.5"), Components.translatable("transmitter.network.6"), Components.translatable("transmitter.network.7"), Components.translatable("transmitter.network.8"), Components.translatable("transmitter.network.9"), Components.translatable("transmitter.network.10"))
+                        List.of(Components.translatable("transmitter.network.1"), Components.translatable("transmitter.network.2"), Components.translatable("transmitter.network.3"), Components.translatable("transmitter.network.4"), Components.translatable("transmitter.network.5"), Components.translatable("transmitter.network.6"), Components.translatable("transmitter.network.7"), Components.translatable("transmitter.network.8"), Components.translatable("transmitter.network.9"), Components.translatable("transmitter.network.10"))
                 )
                 .titled(Lang.translateDirect("gui.transmitter.channel_title").plainCopy())
                 .writingTo(labelChannel)
                 .setState(
-                        te.getPersistentData().contains("channel") ? te.getPersistentData().getInt("channel") : 0
+                        ((ITransmitter) te).getChannel()
                 );
 
-        areaTestInput = new TextInputWidget(x + 45, y + 43, 109, 18)
-                .writingTo(labelTestInput)
-                .setState(
-                        te.getPersistentData().contains("password") ? te.getPersistentData().getString("password") : ""
-                );
+        areaTestInput = new EditBox(font, x + 49, y + 50, 109, 18, Components.immutableEmpty());
+        areaTestInput.setBordered(false);
+        areaTestInput.setMaxLength(16);
+        areaTestInput.setValue(
+                ((ITransmitter) te).getPassword()
+        );
+
 
         confirmButton =
                 new IconButton(x + background.width - 33, y + background.height - 24, AllIcons.I_CONFIRM);
@@ -91,7 +89,7 @@ public class TransmitterScreen extends AbstractSimiScreen {
 
         addRenderableWidget(labelChannel);
         addRenderableWidget(areaChannel);
-        addRenderableWidget(labelTestInput);
+//        addRenderableWidget(labelTestInput);
         addRenderableWidget(areaTestInput);
 
 
@@ -101,16 +99,6 @@ public class TransmitterScreen extends AbstractSimiScreen {
     @Override
     public void removed() {
         super.removed();
-        Packets.channel.sendToServer(new ConfigureTransmitterPacket(te.getBlockPos(), areaChannel.getState(), areaTestInput.getState()));
-    }
-
-    @Override
-    public boolean charTyped(char p_94683_, int p_94684_) {
-        return super.charTyped(p_94683_, p_94684_) || areaTestInput.charTyped(p_94683_, p_94684_);
-    }
-
-    @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        return areaTestInput.keyPressed(keyCode, scanCode, modifiers);
+        TransmissionPackets.channel.sendToServer(new ConfigureTransmitterPacket(te.getBlockPos(), areaChannel.getState(), areaTestInput.getValue()));
     }
 }

@@ -4,6 +4,7 @@
   "block.createendertransmission.energy_transmitter": "应力传输器",
   "block.createendertransmission.item_transmitter": "物品传输器",
   "block.createendertransmission.fluid_transmitter": "流体传输器",
+  "createendertransmission.chunk_loader.loaded": "区块加载器加载了 %1$s 个区块",
 
   "transmitter.network.1": "1",
   "transmitter.network.2": "2",

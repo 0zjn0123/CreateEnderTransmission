@@ -16,7 +16,7 @@ public class ChunkLoaderRecipeCondition implements ICondition{
 
     @Override
     public boolean test(IContext context) {
-        return Config.CHUNK_LOADER.get();
+        return TransmissionConfig.CHUNK_LOADER.get();
     }
 
     public static class Serializer implements IConditionSerializer<ChunkLoaderRecipeCondition>

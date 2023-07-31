@@ -4,6 +4,7 @@ import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.forsteri.createendertransmission.CreateEnderTransmission;
 import net.forsteri.createendertransmission.blocks.chunkLoader.LoaderBlock;
 import net.forsteri.createendertransmission.blocks.energyTransmitter.EnergyTransmitterBlock;
@@ -11,16 +12,18 @@ import net.forsteri.createendertransmission.blocks.fluidTrasmitter.FluidTransmit
 import net.forsteri.createendertransmission.blocks.itemTransmitter.ItemTransmitterBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
-public class Blocks {
+@SuppressWarnings("removal")
+public class TransmissionBlocks {
 
     private static final CreateRegistrate REGISTRATE = CreateEnderTransmission
             .registrate()
             .creativeModeTab(
-                    () -> Tab.TAB);
+                    () -> TransmissionTab.TAB);
 
     public static final BlockEntry<LoaderBlock> CHUNK_LOADER_BLOCK =
             REGISTRATE.block("chunk_loader", LoaderBlock::new)
@@ -29,10 +32,14 @@ public class Blocks {
                     .properties(p -> p.strength(10.0F, 1200.0F))
                     .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                     .transform(pickaxeOnly())
+                    .blockstate((context, provider) -> provider.getVariantBuilder(context.getEntry()).forAllStates(state ->
+                            ConfiguredModel.builder().modelFile(provider.models()
+                                    .getExistingFile(provider.modLoc("block/" + context.getName() + "/block"))).build()))
                     .item()
-                    .transform(customItemModel())
-                    .transform(BlockStressDefaults.setImpact(8))
+                    .model((context, provider) -> provider.withExistingParent(context.getName(), provider.modLoc("block/" + context.getName() + "/block")))
+                    .build()
                     .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(BlockStressDefaults.setImpact(16))
                     .register();
 
     public static final BlockEntry<EnergyTransmitterBlock> ENERGY_TRANSMITTER_BLOCK =
@@ -44,7 +51,9 @@ public class Blocks {
                     .transform(pickaxeOnly())
                     .blockstate(BlockStateGen.directionalBlockProvider(true))
                     .item()
+                    .model(NonNullBiConsumer.noop())
                     .transform(customItemModel())
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .transform(BlockStressDefaults.setImpact(8))
                     .register();
 
@@ -55,8 +64,13 @@ public class Blocks {
                     .properties(p -> p.strength(10.0F, 1200.0F))
                     .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                     .transform(pickaxeOnly())
+                    .blockstate((context, provider) -> provider.getVariantBuilder(context.getEntry()).forAllStates(state ->
+                            ConfiguredModel.builder().modelFile(provider.models()
+                                    .getExistingFile(provider.modLoc("block/" + context.getName() + "/block"))).build()))
                     .item()
-                    .transform(customItemModel())
+                    .model((context, provider) -> provider.withExistingParent(context.getName(), provider.modLoc("block/" + context.getName() + "/block")))
+                    .build()
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .register();
 
     public static final BlockEntry<FluidTransmitterBlock> FLUID_TRANSMITTER_BLOCK =
@@ -66,8 +80,13 @@ public class Blocks {
                     .properties(p -> p.strength(10.0F, 1200.0F))
                     .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
                     .transform(pickaxeOnly())
+                    .blockstate((context, provider) -> provider.getVariantBuilder(context.getEntry()).forAllStates(state ->
+                            ConfiguredModel.builder().modelFile(provider.models()
+                                    .getExistingFile(provider.modLoc("block/" + context.getName() + "/block"))).build()))
                     .item()
-                    .transform(customItemModel())
+                    .model((context, provider) -> provider.withExistingParent(context.getName(), provider.modLoc("block/" + context.getName() + "/block")))
+                    .build()
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .register();
 
     public static void register(){}

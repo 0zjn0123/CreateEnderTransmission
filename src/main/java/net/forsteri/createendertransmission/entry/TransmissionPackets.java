@@ -17,7 +17,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public enum Packets {
+public enum TransmissionPackets {
 
     CONFIGURE_TRANSMITTER(ConfigureTransmitterPacket.class, ConfigureTransmitterPacket::new, NetworkDirection.PLAY_TO_SERVER);
     public static final ResourceLocation CHANNEL_NAME = new ResourceLocation(CreateEnderTransmission.MOD_ID, "main");
@@ -25,11 +25,11 @@ public enum Packets {
     public static final String NETWORK_VERSION_STR = String.valueOf(NETWORK_VERSION);
     public static SimpleChannel channel;
 
-    private final Packets.LoadedPacket<?> packet;
+    private final TransmissionPackets.LoadedPacket<?> packet;
 
-    <T extends SimplePacketBase> Packets(Class<T> type, Function<FriendlyByteBuf, T> factory,
-                                            NetworkDirection direction) {
-        packet = new Packets.LoadedPacket<>(type, factory, direction);
+    <T extends SimplePacketBase> TransmissionPackets(Class<T> type, Function<FriendlyByteBuf, T> factory,
+                                                     NetworkDirection direction) {
+        packet = new TransmissionPackets.LoadedPacket<>(type, factory, direction);
     }
 
     public static void registerPackets() {
@@ -38,7 +38,7 @@ public enum Packets {
                 .clientAcceptedVersions(NETWORK_VERSION_STR::equals)
                 .networkProtocolVersion(() -> NETWORK_VERSION_STR)
                 .simpleChannel();
-        for (Packets packet : values())
+        for (TransmissionPackets packet : values())
             packet.packet.register();
     }
 
@@ -76,7 +76,7 @@ public enum Packets {
             channel.messageBuilder(type, index++, direction)
                     .encoder(encoder)
                     .decoder(decoder)
-                    .consumer(handler)
+                    .consumerMainThread(handler)
                     .add();
         }
     }
