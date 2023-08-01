@@ -21,7 +21,15 @@ public class TransmissionTab {
             REGISTER.register("ender_transmission",
                     () -> CreativeModeTab.builder()
                             .title(Component.translatable("itemGroup.ender_transmission"))
-                            .withTabsBefore(ResourceLocation.of("create:base", ':'))
+                            .withTabsBefore(ResourceLocation.of("create:palettes", ':'))
                             .icon(() -> new ItemStack(TransmissionBlocks.CHUNK_LOADER_BLOCK.get()))
+                            .displayItems(
+                                    (parameters, output) ->
+                                            output.acceptAll(
+                                            CreateEnderTransmission.REGISTRATE.getAll(Registries.ITEM).stream().map(
+                                                    regObj -> new ItemStack(regObj.get())
+                                            ).toList()
+                                            )
+                            )
                             .build());
 }
