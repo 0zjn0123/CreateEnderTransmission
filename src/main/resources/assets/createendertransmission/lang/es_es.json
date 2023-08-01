@@ -4,6 +4,7 @@
   "block.createendertransmission.energy_transmitter": "Transmisor de energía",
   "block.createendertransmission.item_transmitter": "Transmisor de items",
   "block.createendertransmission.fluid_transmitter": "Transmisor de fluidos",
+  "createendertransmission.chunk_loader.loaded": "El cargador de chunks cargó %1$s chunks",
 
   "transmitter.network.1": "1",
   "transmitter.network.2": "2",
