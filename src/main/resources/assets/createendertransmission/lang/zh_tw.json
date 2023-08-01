@@ -4,6 +4,8 @@
   "block.createendertransmission.energy_transmitter": "應力傳輸器",
   "block.createendertransmission.item_transmitter": "物品傳輸器",
   "block.createendertransmission.fluid_transmitter": "流體傳輸器",
+  "createendertransmission.chunk_loader.loaded": "區塊載入器載入了 %1$s 個區塊",
+
   "transmitter.network.1": "1",
   "transmitter.network.2": "2",
   "transmitter.network.3": "3",
@@ -14,5 +16,6 @@
   "transmitter.network.8": "8",
   "transmitter.network.9": "9",
   "transmitter.network.10": "10",
+
   "create.gui.transmitter.channel_title": "網路"
 }
