@@ -18,3 +18,4 @@ out/
 # Visual Studio Code
 .history/
 Icon*
+!icon.png
