@@ -42,6 +42,16 @@ public class EnergyTransmitterBlockEntity extends KineticBlockEntity implements 
     public List<KineticBlockEntity> getConnectedTransmitters(){
         Map<String, List<KineticBlockEntity>> channel = EnergyNetwork.ENERGY.channels.get(getChannel());
 
+        channel.values().removeIf(List::isEmpty);
+
+        channel.forEach((password, transmitters) -> transmitters.removeIf(blockEntity ->
+                !(blockEntity instanceof EnergyTransmitterBlockEntity transmitter)
+                        ||
+                                transmitter.getChannel() != getChannel() || !transmitter.getPassword().equals(password)
+                        ));
+
+        channel.values().forEach(list -> list.removeIf(BlockEntity::isRemoved));
+
         if (channel.containsKey(getPassword())) {
             List<KineticBlockEntity> list = channel
                     .get(getPassword());
@@ -49,12 +59,10 @@ public class EnergyTransmitterBlockEntity extends KineticBlockEntity implements 
             if(!list.contains(this))
                 list.add(this);
 
+
+
             return list;
         }
-
-        channel.values().removeIf(List::isEmpty);
-
-        channel.values().forEach(list -> list.removeIf(BlockEntity::isRemoved));
 
         ArrayList<KineticBlockEntity> list = new ArrayList<>(List.of(this));
 
@@ -72,17 +80,22 @@ public class EnergyTransmitterBlockEntity extends KineticBlockEntity implements 
 
         if (level == null) return;
 
+//        detachKinetics();
+
+        if (hasNetwork())
+            getOrCreateNetwork().remove(this);
         detachKinetics();
+        removeSource();
     }
 
     @Override
     public void afterReload(){
         if (level == null) return;
 
-        if (hasNetwork())
-            getOrCreateNetwork().remove(this);
-        removeSource();
-        detachKinetics();
+//        if (hasNetwork())
+//            getOrCreateNetwork().remove(this);
+//        detachKinetics();
+//        removeSource();
         attachKinetics();
     }
 
