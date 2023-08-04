@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "createendertransmission",
+  "version": "${version}",
+  "name": "Create Ender Transmission",
+  "description": "Non-dimensional Machanines",
+  "authors": [
+    "Forsteri"
+  ],
+  "contact": {
+    "sources": "https://github.com/RuochenFu21/CreateEnderTransmission"
+  },
+  "license": "MIT",
+  "icon": "assets/createendertransmission/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.forsteri.createendertransmission.CreateEnderTransmission"
+    ],
+    "client": [
+      "com.forsteri.createendertransmission.CreateEnderTransmission"
+    ],
+    "fabric-datagen": [
+      "com.forsteri.createendertransmission.CreateEnderTransmission"
+    ]
+  },
+  "mixins": [
+    "createendertransmission.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "create": ">=0.5.1-a",
+    "minecraft": "${mc_version}"
+  }
+}

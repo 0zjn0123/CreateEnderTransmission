@@ -2,23 +2,16 @@ package com.forsteri.createendertransmission.blocks.fluidTrasmitter;
 
 import com.forsteri.createendertransmission.blocks.AbstractMatterTransmitterBlockEntity;
 import com.forsteri.createendertransmission.blocks.MatterTransmitterNetwork;
-import com.forsteri.createendertransmission.transmitUtil.ITransmitter;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTransferable;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-public class FluidTransmitterBlockEntity extends AbstractMatterTransmitterBlockEntity implements ITransmitter {
+public class FluidTransmitterBlockEntity extends AbstractMatterTransmitterBlockEntity implements FluidTransferable {
     public FluidTransmitterBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
     }
@@ -28,20 +21,9 @@ public class FluidTransmitterBlockEntity extends AbstractMatterTransmitterBlockE
         return MatterTransmitterNetwork.FLUID;
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Override
-    protected Function<Supplier<INBTSerializable<CompoundTag>>, ?> getCapability() {
-        return FluidTransmitterInventoryHandler::new;
-    }
-
-    @Override
-    protected Predicate<Capability<?>> getMatterCapPredicate() {
-        return this::isFluidHandlerCap;
-    }
-
-    @NotNull
-    @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (isFluidHandlerCap(cap)) return capability.cast();
-        return super.getCapability(cap, side);
+    public @Nullable Storage<FluidVariant> getFluidStorage(@Nullable Direction face) {
+        return (SerializableSmartFluidTank) getInv();
     }
 }

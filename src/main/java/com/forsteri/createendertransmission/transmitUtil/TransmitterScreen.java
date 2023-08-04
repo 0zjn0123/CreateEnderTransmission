@@ -18,23 +18,19 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-@SuppressWarnings("FieldCanBeLocal")
-public class TransmitterScreen extends AbstractSimiScreen {
+public class TransmitterScreen<T extends KineticBlockEntity & ITransmitter> extends AbstractSimiScreen {
 
-    public KineticBlockEntity te;
+    public T te;
 
     public ItemStack renderedItem;
 
-    public TransmitterScreen(KineticBlockEntity te, ItemStack renderedItem) {
+    public TransmitterScreen(T te, ItemStack renderedItem) {
         super(Lang.translateDirect("gui.sequenced_gearshift.title"));
         this.te = te;
         this.renderedItem = renderedItem;
     }
 
     private final AllGuiTextures background = AllGuiTextures.WAND_OF_SYMMETRY;
-    private IconButton confirmButton;
-
-    private Label labelChannel;
 
     private ScrollInput areaChannel;
 
@@ -63,7 +59,7 @@ public class TransmitterScreen extends AbstractSimiScreen {
         int x = guiLeft;
         int y = guiTop;
 
-        labelChannel = new Label(x + 49, y + 28, Components.immutableEmpty()).colored(0xFFFFFFFF)
+        Label labelChannel = new Label(x + 49, y + 28, Components.immutableEmpty()).colored(0xFFFFFFFF)
                 .withShadow();
 
         areaChannel = new SelectionScrollInput(x + 45, y + 21, 109, 18).forOptions(
@@ -71,26 +67,19 @@ public class TransmitterScreen extends AbstractSimiScreen {
                 )
                 .titled(Lang.translateDirect("gui.transmitter.channel_title").plainCopy())
                 .writingTo(labelChannel)
-                .setState(
-                        te.getTileData().contains("channel") ? te.getTileData().getInt("channel") : 0
-                );
+                .setState(te.getChannel());
 
         areaTestInput = new EditBox(font, x + 49, y + 50, 109, 18, Components.immutableEmpty());
-//                .writingTo(labelTestInput)
         areaTestInput.setBordered(false);
         areaTestInput.setMaxLength(16);
-        areaTestInput.setValue(
-                te.getTileData().contains("password") ? te.getTileData().getString("password") : ""
-        );
+        areaTestInput.setValue(te.getPassword());
 
 
-        confirmButton =
-                new IconButton(x + background.width - 33, y + background.height - 24, AllIcons.I_CONFIRM);
+        IconButton confirmButton = new IconButton(x + background.width - 33, y + background.height - 24, AllIcons.I_CONFIRM);
         confirmButton.withCallback(this::onClose);
 
         addRenderableWidget(labelChannel);
         addRenderableWidget(areaChannel);
-//        addRenderableWidget(labelTestInput);
         addRenderableWidget(areaTestInput);
 
 
@@ -100,16 +89,8 @@ public class TransmitterScreen extends AbstractSimiScreen {
     @Override
     public void removed() {
         super.removed();
+        te.getExtraCustomData().putInt("channel", areaChannel.getState());
+        te.getExtraCustomData().putString("password", areaTestInput.getValue());
         TransmissionPackets.channel.sendToServer(new ConfigureTransmitterPacket(te.getBlockPos(), areaChannel.getState(), areaTestInput.getValue()));
     }
-//
-//    @Override
-//    public boolean charTyped(char p_94683_, int p_94684_) {
-//        return super.charTyped(p_94683_, p_94684_) || areaTestInput.charTyped(p_94683_, p_94684_);
-//    }
-//
-//    @Override
-//    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-//        return areaTestInput.keyPressed(keyCode, scanCode, modifiers);
-//    }
 }

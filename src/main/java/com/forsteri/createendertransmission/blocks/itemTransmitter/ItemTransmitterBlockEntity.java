@@ -2,18 +2,17 @@ package com.forsteri.createendertransmission.blocks.itemTransmitter;
 
 import com.forsteri.createendertransmission.blocks.AbstractMatterTransmitterBlockEntity;
 import com.forsteri.createendertransmission.blocks.MatterTransmitterNetwork;
+import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
+import io.github.fabricators_of_create.porting_lib.transfer.item.ItemTransferable;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.INBTSerializable;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-public class ItemTransmitterBlockEntity extends AbstractMatterTransmitterBlockEntity {
+public class ItemTransmitterBlockEntity extends AbstractMatterTransmitterBlockEntity implements ItemTransferable {
 
     public ItemTransmitterBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -24,13 +23,10 @@ public class ItemTransmitterBlockEntity extends AbstractMatterTransmitterBlockEn
         return MatterTransmitterNetwork.ITEM;
     }
 
-    @Override
-    protected Function<Supplier<INBTSerializable<CompoundTag>>, ?> getCapability() {
-        return ItemTransmitterInventoryHandler::new;
-    }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Override
-    protected Predicate<Capability<?>> getMatterCapPredicate() {
-        return this::isItemHandlerCap;
+    public @Nullable Storage<ItemVariant> getItemStorage(@Nullable Direction face) {
+        return (ItemStackHandler) getInv();
     }
 }

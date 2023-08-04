@@ -41,13 +41,14 @@ public class ConfigureTransmitterPacket extends BlockEntityConfigurationPacket<K
 
     @Override
     protected void applySettings(KineticBlockEntity tileEntity) {
+        if (!(tileEntity instanceof ITransmitter transmitter)) return;
         if(
-                tileEntity.getTileData().getInt("channel") != channel ||
-                        !tileEntity.getTileData().getString("password").equals(password)
+                transmitter.getChannel() != channel ||
+                        !transmitter.getPassword().equals(password)
         ) {
             ((ITransmitter) tileEntity).reloadSettings();
-            tileEntity.getTileData().putInt("channel", channel);
-            tileEntity.getTileData().putString("password", password);
+            tileEntity.getExtraCustomData().putInt("channel", channel);
+            tileEntity.getExtraCustomData().putString("password", password);
             tileEntity.detachKinetics();
             tileEntity.attachKinetics();
             ((ITransmitter) tileEntity).afterReload();

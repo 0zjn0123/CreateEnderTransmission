@@ -1,9 +1,9 @@
 package com.forsteri.createendertransmission.blocks;
 
+import io.github.fabricators_of_create.porting_lib.util.INBTSerializable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraftforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;

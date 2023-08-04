@@ -9,6 +9,9 @@ import com.simibubi.create.foundation.gui.ScreenOpener;
 import com.forsteri.createendertransmission.entry.TransmissionBlocks;
 import com.forsteri.createendertransmission.entry.TransmissionBlockEntities;
 import com.forsteri.createendertransmission.transmitUtil.TransmitterScreen;
+import com.tterrag.registrate.fabric.EnvExecutor;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,9 +25,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -59,15 +59,15 @@ public class EnergyTransmitterBlock extends DirectionalKineticBlock implements I
                 return InteractionResult.PASS;
         }
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+        EnvExecutor.runWhenOn(EnvType.CLIENT,
                 () -> () -> withBlockEntityDo(worldIn, pos, te -> this.displayScreen(te, player)));
         return InteractionResult.SUCCESS;
     }
 
-    @OnlyIn(value = Dist.CLIENT)
+    @Environment(value = EnvType.CLIENT)
     protected void displayScreen(EnergyTransmitterBlockEntity te, Player player) {
         if (player instanceof LocalPlayer)
-            ScreenOpener.open(new TransmitterScreen(te, TransmissionBlocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
+            ScreenOpener.open(new TransmitterScreen<>(te, TransmissionBlocks.ENERGY_TRANSMITTER_BLOCK.asStack()));
     }
 
     @Override
