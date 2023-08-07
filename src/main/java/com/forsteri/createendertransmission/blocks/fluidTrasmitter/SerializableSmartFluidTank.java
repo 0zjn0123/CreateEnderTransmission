@@ -1,8 +1,8 @@
 package com.forsteri.createendertransmission.blocks.fluidTrasmitter;
 
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
+import io.github.fabricators_of_create.porting_lib.extensions.INBTSerializable;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
-import io.github.fabricators_of_create.porting_lib.util.INBTSerializable;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.function.Consumer;
