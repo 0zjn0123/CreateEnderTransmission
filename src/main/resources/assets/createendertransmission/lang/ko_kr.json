@@ -1,0 +1,19 @@
+{
+  "block.createendertransmission.chunk_loader": "청크 로더",
+  "block.createendertransmission.energy_transmitter": "동력 전송기",
+  "block.createendertransmission.fluid_transmitter": "유체 전송기",
+  "block.createendertransmission.item_transmitter": "아이템 전송기",
+  "create.gui.transmitter.channel_title": "네트워크",
+  "createendertransmission.chunk_loader.loaded": "청크 %1$s개를 로드함",
+  "itemGroup.ender_transmission": "Create Ender Transmission",
+  "transmitter.network.1": "1",
+  "transmitter.network.10": "10",
+  "transmitter.network.2": "2",
+  "transmitter.network.3": "3",
+  "transmitter.network.4": "4",
+  "transmitter.network.5": "5",
+  "transmitter.network.6": "6",
+  "transmitter.network.7": "7",
+  "transmitter.network.8": "8",
+  "transmitter.network.9": "9"
+}
