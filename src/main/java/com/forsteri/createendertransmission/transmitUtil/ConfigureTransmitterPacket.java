@@ -47,8 +47,8 @@ public class ConfigureTransmitterPacket extends BlockEntityConfigurationPacket<K
                         !transmitter.getPassword().equals(password)
         ) {
             ((ITransmitter) tileEntity).reloadSettings();
-            tileEntity.getExtraCustomData().putInt("channel", channel);
-            tileEntity.getExtraCustomData().putString("password", password);
+            tileEntity.getCustomData().putInt("channel", channel);
+            tileEntity.getCustomData().putString("password", password);
             tileEntity.detachKinetics();
             tileEntity.attachKinetics();
             ((ITransmitter) tileEntity).afterReload();

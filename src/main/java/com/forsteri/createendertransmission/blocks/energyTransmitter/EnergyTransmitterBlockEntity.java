@@ -95,8 +95,8 @@ public class EnergyTransmitterBlockEntity extends KineticBlockEntity implements 
 
     @Override
     public float propagateRotationTo(KineticBlockEntity target, BlockState stateFrom, BlockState stateTo, BlockPos diff, boolean connectedViaAxes, boolean connectedViaCogs) {
-        return (target.getExtraCustomData().getInt("channel") == this.getChannel())
-                && target.getExtraCustomData().getString("password").equals(this.getPassword()) ? 1f : 0f;
+        return (target.getCustomData().getInt("channel") == this.getChannel())
+                && target.getCustomData().getString("password").equals(this.getPassword()) ? 1f : 0f;
     }
 
 }

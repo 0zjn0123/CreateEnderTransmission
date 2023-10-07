@@ -20,7 +20,7 @@ public class TransmissionBlocks {
 
     private static final CreateRegistrate REGISTRATE = CreateEnderTransmission
             .registrate()
-            .useCreativeTab(TransmissionTab.TAB);
+            .useCreativeTab(TransmissionTab.TAB_KEY);
 
     public static final BlockEntry<LoaderBlock> CHUNK_LOADER_BLOCK =
             REGISTRATE.block("chunk_loader", LoaderBlock::new)

@@ -1,6 +1,6 @@
 package com.forsteri.createendertransmission.transmitUtil;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.forsteri.createendertransmission.entry.TransmissionPackets;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.gui.AbstractSimiScreen;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
@@ -12,7 +12,7 @@ import com.simibubi.create.foundation.gui.widget.ScrollInput;
 import com.simibubi.create.foundation.gui.widget.SelectionScrollInput;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Lang;
-import com.forsteri.createendertransmission.entry.TransmissionPackets;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.world.item.ItemStack;
 
@@ -37,17 +37,17 @@ public class TransmitterScreen<T extends KineticBlockEntity & ITransmitter> exte
     private EditBox areaTestInput;
 
     @Override
-    protected void renderWindow(PoseStack ms, int mouseX, int mouseY, float partialTicks) {
+    protected void renderWindow(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         int x = guiLeft;
         int y = guiTop;
 
-        background.render(ms, x, y, this);
-        font.draw(ms, renderedItem.getHoverName(), x + 11, y + 4, 0x6B3802);
+        background.render(guiGraphics, x, y);
+        guiGraphics.drawString(font, renderedItem.getHoverName(), x + 11, y + 4, 0x6B3802, false);
 
         GuiGameElement.of(renderedItem)
                 .<GuiGameElement.GuiRenderBuilder>at(x + background.width + 6, y + background.height - 56, -200)
                 .scale(5)
-                .render(ms);
+                .render(guiGraphics);
     }
 
     @Override
@@ -89,8 +89,8 @@ public class TransmitterScreen<T extends KineticBlockEntity & ITransmitter> exte
     @Override
     public void removed() {
         super.removed();
-        te.getExtraCustomData().putInt("channel", areaChannel.getState());
-        te.getExtraCustomData().putString("password", areaTestInput.getValue());
+        te.getCustomData().putInt("channel", areaChannel.getState());
+        te.getCustomData().putString("password", areaTestInput.getValue());
         TransmissionPackets.channel.sendToServer(new ConfigureTransmitterPacket(te.getBlockPos(), areaChannel.getState(), areaTestInput.getValue()));
     }
 }
