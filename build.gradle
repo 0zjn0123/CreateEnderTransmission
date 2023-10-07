@@ -112,10 +112,6 @@ tasks.withType(JavaCompile).configureEach {
     it.options.release = Integer.parseInt(sourceCompatibility)
 }
 
-java {
-    withSourcesJar()
-}
-
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
