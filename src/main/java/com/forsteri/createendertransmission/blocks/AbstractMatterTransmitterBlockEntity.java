@@ -3,7 +3,7 @@ package com.forsteri.createendertransmission.blocks;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.forsteri.createendertransmission.CreateEnderTransmission;
 import com.forsteri.createendertransmission.transmitUtil.ITransmitter;
-import io.github.fabricators_of_create.porting_lib.extensions.INBTSerializable;
+import io.github.fabricators_of_create.porting_lib.core.util.INBTSerializable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;

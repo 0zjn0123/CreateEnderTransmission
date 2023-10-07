@@ -10,9 +10,9 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.forsteri.createendertransmission.CreateEnderTransmission;
+import io.github.fabricators_of_create.porting_lib.models.generators.ConfiguredModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
 
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
@@ -20,8 +20,7 @@ public class TransmissionBlocks {
 
     private static final CreateRegistrate REGISTRATE = CreateEnderTransmission
             .registrate()
-            .creativeModeTab(
-                    () -> TransmissionTab.TAB);
+            .useCreativeTab(TransmissionTab.TAB);
 
     public static final BlockEntry<LoaderBlock> CHUNK_LOADER_BLOCK =
             REGISTRATE.block("chunk_loader", LoaderBlock::new)

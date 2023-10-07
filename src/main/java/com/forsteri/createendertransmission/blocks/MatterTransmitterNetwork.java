@@ -2,7 +2,7 @@ package com.forsteri.createendertransmission.blocks;
 
 import com.forsteri.createendertransmission.blocks.fluidTrasmitter.SerializableSmartFluidTank;
 import com.forsteri.createendertransmission.CreateEnderTransmission;
-import io.github.fabricators_of_create.porting_lib.extensions.INBTSerializable;
+import io.github.fabricators_of_create.porting_lib.core.util.INBTSerializable;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import net.minecraft.nbt.CompoundTag;
 

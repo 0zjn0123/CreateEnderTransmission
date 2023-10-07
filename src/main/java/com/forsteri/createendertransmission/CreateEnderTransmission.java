@@ -3,6 +3,7 @@ package com.forsteri.createendertransmission;
 import com.forsteri.createendertransmission.blocks.MatterWorldSavedData;
 import com.forsteri.createendertransmission.entry.*;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import io.github.fabricators_of_create.porting_lib.data.ExistingFileHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -15,7 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.Executor;
 
@@ -45,8 +45,7 @@ public class CreateEnderTransmission implements ModInitializer, DataGeneratorEnt
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
         ExistingFileHelper helper = ExistingFileHelper.withResourcesFromArg();
-        REGISTRATE.setupDatagen(generator, helper);
-//        EnchantmentIndustry.gatherData(fabricDataGenerator, helper);
+        REGISTRATE.setupDatagen(generator.createPack(), helper);
     }
 
     public static void playerLoggedIn(ServerGamePacketListenerImpl handler, PacketSender sender, MinecraftServer server) {
