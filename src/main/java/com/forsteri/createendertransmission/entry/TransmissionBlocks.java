@@ -1,15 +1,15 @@
 package com.forsteri.createendertransmission.entry;
 
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
-import com.simibubi.create.foundation.data.BlockStateGen;
-import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.forsteri.createendertransmission.CreateEnderTransmission;
 import com.forsteri.createendertransmission.blocks.chunkLoader.LoaderBlock;
 import com.forsteri.createendertransmission.blocks.energyTransmitter.EnergyTransmitterBlock;
 import com.forsteri.createendertransmission.blocks.fluidTrasmitter.FluidTransmitterBlock;
 import com.forsteri.createendertransmission.blocks.itemTransmitter.ItemTransmitterBlock;
+import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -22,7 +22,11 @@ public class TransmissionBlocks {
 
     private static final CreateRegistrate REGISTRATE = CreateEnderTransmission
             .registrate()
-            .useCreativeTab(TransmissionTab.TAB);
+            .setCreativeTab(TransmissionTab.TAB);
+
+    static {
+        assert REGISTRATE != null;
+    }
 
     public static final BlockEntry<LoaderBlock> CHUNK_LOADER_BLOCK =
             REGISTRATE.block("chunk_loader", LoaderBlock::new)
