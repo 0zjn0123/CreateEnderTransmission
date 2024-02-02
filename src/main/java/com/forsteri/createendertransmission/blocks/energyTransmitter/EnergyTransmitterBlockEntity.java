@@ -79,13 +79,14 @@ public class EnergyTransmitterBlockEntity extends KineticBlockEntity implements 
         getConnectedTransmitters().remove(this);
 
         if (level == null) return;
-
-//        detachKinetics();
-
-        if (hasNetwork())
-            getOrCreateNetwork().remove(this);
+//
+//        if (hasNetwork())
+//            getOrCreateNetwork().remove(this);
+//
         detachKinetics();
         removeSource();
+
+        attachKinetics();
     }
 
     @Override
