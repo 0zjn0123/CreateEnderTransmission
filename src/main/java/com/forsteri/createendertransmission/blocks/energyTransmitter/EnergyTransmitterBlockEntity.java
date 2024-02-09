@@ -67,7 +67,7 @@ public class EnergyTransmitterBlockEntity extends KineticBlockEntity implements 
         ArrayList<KineticBlockEntity> list = new ArrayList<>(List.of(this));
 
         channel.put(
-                this.getTileData().getString("password"),
+                this.getPassword(),
                 list
         );
 
@@ -102,8 +102,9 @@ public class EnergyTransmitterBlockEntity extends KineticBlockEntity implements 
 
     @Override
     public float propagateRotationTo(KineticBlockEntity target, BlockState stateFrom, BlockState stateTo, BlockPos diff, boolean connectedViaAxes, boolean connectedViaCogs) {
-        return (target.getTileData().getInt("channel") == this.getTileData().getInt("channel")
-                && target.getTileData().getString("password").equals(this.getTileData().getString("password"))) ? 1f : 0f;
+        return (target.getTileData().getInt("channel") == getChannel()
+                && target.getTileData().getString("password").equals(getPassword())
+                && target.getBlockState().getBlock() instanceof EnergyTransmitterBlock) ? 1f : 0f;
     }
 
 }
