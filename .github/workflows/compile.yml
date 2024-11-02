@@ -14,7 +14,7 @@ jobs:
       uses: Ruochenfu2011/compilation@v1
       
     - name: Archive Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Artifacts
         path: ./build/libs
